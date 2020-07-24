@@ -1,6 +1,6 @@
-# flexitkt
+# atelier
 
-Flexit Customer Services (in norwegian KundeTjenester), which is the reason for the name KT.
+Atelier Clothes Making Services.
 
 # styling
 
@@ -77,25 +77,6 @@ python manage.py compilemessages
 ```
 
 
-# Setup microsoft authentication
-
-Make sure `'django.contrib.sites'` is in `INSTALLED_APPS` and edit site instance through django admin, 
-and set `domain` to `localhost:8000` for local server and `flexitkt.herokuapp.com` for deployed app
-
-Create a [Azure AD App](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). After you 
-register the app, make sure you click on “Certificates & Secrets” and generate a new Client Secret.
-
-When you are registering the app it will ask for a Redirect URI. This must match the absolute URL of your
- microsoft_auth:auth-callback view. By default this would be https://flexitkt.herokuapp.com/microsoft/auth-callback/ 
- for heroku app and http://localhost:8000 for local server.
-
-This URL must be HTTPS unless your hostname is localhost. localhost can only be used if DEBUG is set to True.
- Microsoft only allows HTTP authentication if the hostname is localhost.
- 
-Use client id and secret from Azure AD App to configure environment variables.
-
-Microsoft authentication can be disabled with setting 
-
 # Deploy to heroku with docker container registry
 
 Log in to registry, run
@@ -107,7 +88,7 @@ $> heroku container:login
 Build the Docker image using dockerfile for production and tag it with the following format:
 
 ```
-$> docker build -f Dockerfile.prod -t registry.heroku.com/flexitkt/web .
+$> docker build -f Dockerfile.prod -t registry.heroku.com/atelier/web .
 ```
 
 IMPORTANT !!! Use `Dockerfile.stg` when deploying to staging
@@ -115,12 +96,12 @@ IMPORTANT !!! Use `Dockerfile.stg` when deploying to staging
 Push the image to the registry:
 
 ```
-$> docker push registry.heroku.com/flexitkt/web
+$> docker push registry.heroku.com/atelier/web
 ```
 
 Release the image:
 ```
-$> heroku container:release -a flexitkt web
+$> heroku container:release -a atelier web
 ```
 
 Migrate database if needed:
@@ -135,16 +116,16 @@ heroku run python manage.py rqworker
 
 Or run it as a one-liner
 ```
-docker build -f Dockerfile.stg -t registry.heroku.com/flexitkt/web . && docker push registry.heroku.com/flexitkt/web && heroku container:release -a flexitkt web && heroku run python manage.py migrate
+docker build -f Dockerfile.stg -t registry.heroku.com/atelier/web . && docker push registry.heroku.com/atelier/web && heroku container:release -a atelier web && heroku run python manage.py migrate
 ```
 
-To deploy to `flexitkt-production` just replace in the above commands `flexitkt` with `flexitkt-production`
+To deploy to `atelier-production` just replace in the above commands `atelier` with `atelier-production`
 
 # Form warning settings
 
 For displaying warnings if input value in the form is out of sanity or expectation limits we use 
-model `FlexitFormWarningSettings`. At the moment the only place where we utilize this functionality is 
-PriceEstimate widget. To set it up an instance of `FlexitFormWarningSettings` needs to be created with the limits.
+model `AtelierFormWarningSettings`. At the moment the only place where we utilize this functionality is 
+PriceEstimate widget. To set it up an instance of `AtelierFormWarningSettings` needs to be created with the limits.
 The easiest way to do so is to run management script 
 ```
 $> python manage.py create_initial_form_warning_settings_if_not_exist
