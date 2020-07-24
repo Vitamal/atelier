@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    container_name: atelier_db
+    hostname: atelier_db
+    restart: always
+    env_file:
+      - ./docker/environments
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    # Run postgres server on port 5434,
+    # expose and map port 5434 to prevent conflicts with postgres server on localhost
+    expose:
+      - "5434"
+    ports:
+      - "5434:5434"
+    command: -p 5434
+  redis:
+    image: redis:3
+    hostname: redis
+    ports:
+      - "6379:6379"
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    hostname: web
+    depends_on:
+      - db
+      - redis
+    command: sh ./docker/start.sh
+    volumes:
+      - .:/web
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./docker/environments
+    tty: true

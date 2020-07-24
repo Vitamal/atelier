@@ -1,0 +1,7 @@
+-r common.txt
+
+# a Python WSGI HTTP Server for UNIX
+# gunicorn==20.0.4
+
+# Django ASGI (HTTP/WebSocket) server
+daphne==2.5.0

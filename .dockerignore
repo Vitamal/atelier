@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+env/
+db.sqlite3
+develop-environment.json
+oauth_settings.yml
+dump.rdb
+pd_data/
+
+flexitkt/flexitkt_bulma/
+
+
+**/node_modules/

@@ -1,0 +1,47 @@
+# https://pypi.python.org/pypi/Django
+Django==3.0.8
+dj-database-url==0.5.0
+
+# https://pypi.python.org/pypi/ievv_opensource
+ievv-opensource==5.20.2
+
+# for static files (WhiteNoise allows your web app to serve its own static files)
+whitenoise==5.0.1
+
+requests==2.23.0
+
+#PyYAML is a YAML parser and emitter for Python.
+PyYAML==5.3.1
+
+django-filter==2.2.0
+djangorestframework==3.11.0
+djangorestframework-api-key==2.0.0
+markdown==3.2.1
+django-admin-list-filter-dropdown==1.0.3
+
+# for swagger-ui
+coreapi==2.3.3
+uritemplate==3.0.1
+
+
+# django-formtools==2.2
+
+# for running server as ASGI
+channels==2.4.0
+channels_redis==2.4.2
+asgiref==3.2.7
+
+PyJWT==1.7.1
+
+django-rq==2.3.2
+html2text==2020.1.16
+gsm0338==1.0.0
+
+# Extract data from Excel spreadsheets
+xlrd==1.2.0
+
+# S3 bucket
+boto3==1.12.39
+
+cloudinary==1.21.1
+redis==3.4.1

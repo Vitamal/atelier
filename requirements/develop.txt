@@ -1,0 +1,7 @@
+-r common.txt
+
+django-debug-toolbar==2.2
+
+model-mommy==2.0.0
+
+htmls==1.0.0
