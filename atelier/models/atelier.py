@@ -11,7 +11,7 @@ class Atelier(BaseModel):
         max_length=3, null=False, default=DEFAULT_CURRENCY,
         choices=AVAILABLE_CURRENCIES.iter_as_django_choices_short()
     )
-    post_code = models.CharField(max_length=4, null=False, blank=True, default='')
+    post_code = models.CharField(max_length=5, null=False, blank=True, default='')
 
     addressline = models.CharField(max_length=255, null=False, blank=True, default='')
 
