@@ -1,8 +1,7 @@
-/*.bg-img {*/
+/*.bg {*/
 /*    !* The image used as background for all pages - template.html*!*/
-/*    background-image: url("/atelier/static/atelier/background/background.jpg");*/
+/*  background-image: url('/staticfiles/atelier/background/background.jpg');*/
 /*    min-height: 100%;*/
-
 /*  !* Center and scale the image nicely *!*/
 /*  background-position: top;*/
 /*  background-repeat: no-repeat;*/

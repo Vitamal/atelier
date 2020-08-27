@@ -1,0 +1,102 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    {% block head %}
+
+        {% block meta %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta http-equiv="x-ua-compatible" content="ie=edge">
+        {% endblock meta %}
+
+        {% block styles %}
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+            <!-- Google Fonts -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+            <!-- Bootstrap core CSS -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+                  rel="stylesheet">
+            <!-- Material Design Bootstrap -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+            <!-- Your custom styles (optional) -->
+            <link rel="stylesheet" href="{% static '/atelier/css/style.css' %}">
+        {% endblock styles %}
+
+        {% comment %}
+            The title tag contains three blocks:
+
+            - ``title``: Overridden per page.
+            - ``title-pre`` and ``title-post``: Typically overridden by overriding ``base.django.html``
+              to provide some common prefix/postfix for the the title tag for the entire site.
+        {% endcomment %}
+        <title>
+            {% block title-pre %}{% endblock %}
+            {% block title %}{% endblock %}
+            {% block title-post %}{% endblock %}
+        </title>
+    {% endblock head %}
+
+</head>
+
+<body>
+{% block global-pre-body %}
+    {% comment %}
+                This block is here to be overridden in base.django.html.
+                It should be used to add some global component
+                before the body, such as a global navigation header.
+
+                This block is not intended to be, and should never be overridden in app views.
+            {% endcomment %}
+{% endblock global-pre-body %}
+
+{% block body %}
+    <!--Main Navigation-->
+    <header>
+        {% block header %} {% endblock header %}
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main class="mt-5">
+        {% block main %} {% endblock main %}
+    </main>
+    <!--Main layout-->
+
+    <!-- Footer -->
+    {% block footer %} {% endblock footer %}
+    <!-- Footer -->
+
+{% endblock body %}
+
+{% block global-post-body %}
+    {% comment %}
+            This block is here to be overridden in standalone-base.django.html
+            and base.django.html. It should be used to add some global component
+            after the body, such as a global footer header.
+
+            This block is not intended to be, and should never be overridden in app views.
+        {% endcomment %}
+{% endblock global-post-body %}
+
+<!-- SCRIPTS -->
+{% block end-of-body %}
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+{% endblock end-of-body %}
+
+</body>
+
+</html>

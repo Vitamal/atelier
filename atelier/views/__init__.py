@@ -1,1 +1,1 @@
-from .index import index
+from .home import HomePageView
