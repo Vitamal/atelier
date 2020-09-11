@@ -1,0 +1,15 @@
+{% extends 'base/single_line_page.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Atelier users{% endblock %}
+
+{% block main %}
+    {% block content-header %}
+    <div class="col-md-12 d-flex flex-row-reverse">
+        <a class="btn btn-primary mr-5 px-5" href="#" type="button">
+            {% trans 'Add user' %}
+        </a>
+    </div>
+{% endblock content-header %}
+{% endblock main %}

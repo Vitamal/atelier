@@ -69,6 +69,7 @@ class User(AbstractUser):
             return self.email
         return name
 
+    # ????
     @true_if_superuser
-    def is_administrator(self):
+    def is_admin(self):
         return self.is_administrator

@@ -20,5 +20,6 @@ from atelier import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.HomePageView.as_view(), name='index'),
+    path('', views.HomePageView.as_view(), name='home'),
+    path('users/', views.UserListView.as_view(), name='user_list'),
 ]

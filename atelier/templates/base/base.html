@@ -62,7 +62,9 @@
 
     <!--Main layout-->
     <main class="mt-5">
-        {% block main %} {% endblock main %}
+        {% block main %}
+            {% block content-header %}{% endblock content-header %}
+        {% endblock main %}
     </main>
     <!--Main layout-->
 
