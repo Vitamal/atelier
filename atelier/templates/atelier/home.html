@@ -8,13 +8,11 @@
 {% block main %}
     <!--Main container-->
     <div class="container bg">
-        <!--Grid row-->
         <div class="row">
-            <!--Grid column-->
             <div class="col-md-7 mb-4">
                 <!--Featured image -->
-                <div class="view overlay z-depth-5">
-                    <img src="{% static 'atelier/background/tailor_shop.jpg' %}"
+                <div class="view overlay z-depth-2">
+                    <img src="{% static 'atelier/pictures/atelier_6.jpg' %}"
                          class="card-img-top tailor-shop "
                          alt="tailor_shop">
                     <a href="{% url 'home' %}">
@@ -27,18 +25,16 @@
             <div class="col-md-5 mb-4">
                 <h2>Welcome to Atelier application!</h2>
                 <hr>
-                <h5>Atelier is a simple, responsive application suitable for ateliers, tailors, design studios or small
+                <p>Atelier is a simple, responsive application suitable for ateliers, tailors, design studios or small
                     sewing business . It uses the best tailor practices, and on top of that, it’s fast, simple, and easy
-                    to use.</h5>
-                <hr>
-                <h5>
+                    to use.</p>
+                <p>
                     Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!
-                </h5>
+                </p>
                 <a href="{% url 'home' %}" class="btn blue-gradient">Try it now!</a>
             </div>
             <!--Grid column-->
         </div>
-        <!--Grid row-->
         <div class="row">
             <!--Grid column-->
             <div class="col-lg-4 col-md-12 mb-4">
@@ -113,7 +109,6 @@
             </div>
             <!--Grid column-->
         </div>
-        <!--Grid row-->
     </div>
     <!--Main container-->
 {% endblock main %}

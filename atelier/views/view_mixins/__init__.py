@@ -1,2 +1,3 @@
 from .atelier_access_mixin import AtelierFilterObjectsPreMixin
 from .user_access_mixin import UserManagementAccessMixin
+from .redirect_success_mixin import RedirectSuccessFormMixin, RedirectSuccessMixin

@@ -131,3 +131,8 @@ The easiest way to do so is to run management script
 $> python manage.py create_initial_form_warning_settings_if_not_exist
 ```
 the values can be edited afterwards through django admin
+
+# First migration
+```
+$> python manage.py makemigrations atelier
+```
