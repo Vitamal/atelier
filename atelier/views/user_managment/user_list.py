@@ -10,6 +10,6 @@ USERS_LIMIT_PER_PAGE = 30
 class UserListView(AtelierFilterObjectsPreMixin, UserManagementAccessMixin, ListView):
     context_object_name = 'users'
     model = get_user_model()
-    template_name = 'atelier/user_list.html'
+    template_name = 'atelier/user_management/user_list.html'
     paginate_by = USERS_LIMIT_PER_PAGE
     ordering = ['username']

@@ -22,4 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePageView.as_view(), name='home'),
     path('users/', views.UserListView.as_view(), name='user_management'),
+    path('users/create', views.UserCreateView.as_view(), name='user_management_create'),
+    path('users/edit/<int:user_id>', views.UserUpdateView.as_view(), name='user_management_edit'),
+    path('users/<int:user_id>', views.UserDetailView.as_view(), name='user_management_detail'),
 ]

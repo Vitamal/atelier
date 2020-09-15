@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}Atelier{% endblock %}
+{% block title %}{% trans 'Atelier' %}{% endblock %}
 
 <!--Main layout-->
 {% block main %}
@@ -23,15 +23,13 @@
             </div>
             <!--Grid column-->
             <div class="col-md-5 mb-4">
-                <h2>Welcome to Atelier application!</h2>
+                <h2>{% trans 'Welcome to Atelier application!' %}</h2>
                 <hr>
-                <p>Atelier is a simple, responsive application suitable for ateliers, tailors, design studios or small
-                    sewing business . It uses the best tailor practices, and on top of that, it’s fast, simple, and easy
-                    to use.</p>
+                <p>{% trans 'Atelier is a simple, responsive application suitable for ateliers, tailors, design studios or small sewing business . It uses the best tailor practices, and on top of that, it’s fast, simple, and easy to use.' %}</p>
                 <p>
-                    Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!
+                    {% trans 'Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!' %}
                 </p>
-                <a href="{% url 'home' %}" class="btn blue-gradient">Try it now!</a>
+                <a href="{% url 'home' %}" class="btn blue-gradient">{% trans 'Try it now!' %}</a>
             </div>
             <!--Grid column-->
         </div>
@@ -51,10 +49,10 @@
                     <!--Card content-->
                     <div class="card-body">
                         <!--Title-->
-                        <h4 class="card-title">Orders</h4>
+                        <h4 class="card-title">{% trans 'Orders' %}</h4>
                         <!--Text-->
-                        <p class="card-text">All atelier`s orders.</p>
-                        <a href="#!" class="btn blue-gradient">Open</a>
+                        <p class="card-text">{% trans 'All atelier`s orders.' %}</p>
+                        <a href="#!" class="btn blue-gradient">{% trans 'Open' %}</a>
                     </div>
                 </div>
                 <!--/.Card-->
@@ -75,10 +73,10 @@
                     <!--Card content-->
                     <div class="card-body">
                         <!--Title-->
-                        <h4 class="card-title">Products</h4>
+                        <h4 class="card-title">{% trans 'Products' %}</h4>
                         <!--Text-->
-                        <p class="card-text">Products made by your atelier.</p>
-                        <a href="#" class="btn blue-gradient">Open</a>
+                        <p class="card-text">{% trans 'Products made by your atelier.' %}</p>
+                        <a href="#" class="btn blue-gradient">{% trans 'Open' %}</a>
                     </div>
                 </div>
                 <!--/.Card-->
@@ -99,10 +97,10 @@
                     <!--Card content-->
                     <div class="card-body">
                         <!--Title-->
-                        <h4 class="card-title">Clients</h4>
+                        <h4 class="card-title">{% trans 'Clients' %}</h4>
                         <!--Text-->
-                        <p class="card-text">All the clients of your atelier.</p>
-                        <a href="#" class="btn blue-gradient">Open</a>
+                        <p class="card-text">{% trans 'All the clients of your atelier.' %}</p>
+                        <a href="#" class="btn blue-gradient">{% trans 'Open' %}</a>
                     </div>
                 </div>
                 <!--/.Card-->
