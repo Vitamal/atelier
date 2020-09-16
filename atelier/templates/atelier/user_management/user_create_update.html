@@ -36,42 +36,74 @@
 
 
             <!-- Form -->
-            <form class="pb-3 px-2" method="post">
+            <form class="pb-3 px-4" method="post">
                 {% csrf_token %}
                 {% for non_field_error in form.non_field_errors %}
                     <p class="text-danger">{{ non_field_error }}</p>
                 {% endfor %}
-                <!-- First name -->
-                <div class="md-form">
-                    <i class="far fa-user prefix text-white"></i>
-                    <input type="text" id="materialRegisterFormFirstName" class="form-control text-white">
-                    <label class="text-white" for="materialRegisterFormFirstName">First name</label>
-                </div>
-                <!-- Last name -->
-                <div class="md-form">
-                    <i class="far fa-hand-point-right prefix text-white"></i>
-                    <input type="email" id="materialRegisterFormLastName" class="form-control text-white">
-                    <label class="text-white" for="materialRegisterFormLastName">Last name</label>
-                </div>
 
-                <!-- E-mail -->
-                <div class="md-form mt-0">
-                    <i class="far fa-envelope prefix text-white"></i>
-                    <input type="email" id="materialRegisterFormEmail" class="form-control text-white">
-                    <label class="text-white" for="materialRegisterFormEmail">E-mail</label>
-                </div>
+                {% for field in form %}
 
-                <!-- Password -->
-                <div class="md-form">
-                    <i class="far fa-star prefix text-white"></i>
-                    <input type="password" id="materialRegisterFormPassword" class="form-control text-white"
-                           aria-describedby="materialRegisterFormPasswordHelpBlock">
-                    <label class="text-white" for="materialRegisterFormPassword">Password</label>
-                    <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-white">
-                        At least 8 characters and 1 digit
-                    </small>
-                </div>
+                    <div class="md-form">
+{#                        <div class="form-group">#}
+                                {{ field }}
+                                {% if not field.field.widget.attrs.hide_label %}
+                                    <label for="{{ field.id_for_label }}"
+                                           class="text-white">{{ field.label }}</label>
+                                {% endif %}
+                            {% for error in field.errors %}<p class="text-danger">{{ error }}</p>{% endfor %}
+                            <small>
+                                        <span class="text-white" id="helptext_{{ field.auto_id }}">
+                                            {{ field.help_text }}
+                                        </span>
+                            </small>
+                        </div>
+                    </div>
+                {% endfor %}
+            <!-- Material unchecked -->
+<div class="form-check">
+    <input type="checkbox" class="form-check-input" id="materialUnchecked">
+    <label class="form-check-label" for="materialUnchecked">Material unchecked</label>
+</div>
 
+                {#                <!-- First name -->#}
+                {#                <div class="md-form">#}
+                {#                    <i class="far fa-user prefix text-white"></i>#}
+                {#                    <input type="text" id="materialRegisterFormFirstName" class="form-control text-white">#}
+                {#                    <label class="text-white" for="materialRegisterFormFirstName">{% trans 'First name' %}</label>#}
+                {#                </div>#}
+                {#                <!-- Last name -->#}
+                {#                <div class="md-form">#}
+                {#                    <i class="far fa-hand-point-right prefix text-white"></i>#}
+                {#                    <input type="email" id="materialRegisterFormLastName" class="form-control text-white">#}
+                {#                    <label class="text-white" for="materialRegisterFormLastName">Last name</label>#}
+                {#                </div>#}
+                {##}
+                {#                <!-- E-mail -->#}
+                {#                <div class="md-form mt-0">#}
+                {#                    <i class="far fa-envelope prefix text-white"></i>#}
+                {#                    <input type="email" id="materialRegisterFormEmail" class="form-control text-white">#}
+                {#                    <label class="text-white" for="materialRegisterFormEmail">E-mail</label>#}
+                {#                </div>#}
+                {##}
+                {#                <!-- Password -->#}
+                {#                <div class="md-form">#}
+                {#                    <i class="far fa-star prefix text-white"></i>#}
+                {#                    <input type="password" id="materialRegisterFormPassword" class="form-control text-white"#}
+                {#                           aria-describedby="materialRegisterFormPasswordHelpBlock">#}
+                {#                    <label class="text-white" for="materialRegisterFormPassword">Password</label>#}
+                {#                    <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-white">#}
+                {#                        At least 8 characters and 1 digit#}
+                {#                    </small>#}
+                {#                </div>#}
+
+                <div class="mb-3">
+                    <button class="btn btn-primary" type="submit">{% trans 'Save user' %}</button>
+                    <a class="btn btn-warning" href="
+
+
+                            {% if cancel_url %}{{ cancel_url }}{% else %}{% url 'user_management' %}{% endif %}">{% trans 'Cancel' %}</a>
+                </div>
             </form>
             <!-- Form -->
 
