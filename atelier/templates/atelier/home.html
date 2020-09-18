@@ -7,7 +7,7 @@
 <!--Main layout-->
 {% block main %}
     <!--Main container-->
-    <div class="container bg">
+    <div class="container bg mt-5">
         <div class="row">
             <div class="col-md-7 mb-4">
                 <!--Featured image -->
@@ -15,7 +15,7 @@
                     <img src="{% static 'atelier/pictures/atelier_6.jpg' %}"
                          class="card-img-top tailor-shop "
                          alt="tailor_shop">
-                    <a href="{% url 'home' %}">
+                    <a href="{% url 'index' %}">
                         <div class="mask waves-effect waves-light rgba-white-slight"></div>
                     </a>
                 </div>
@@ -29,7 +29,7 @@
                 <p>
                     {% trans 'Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!' %}
                 </p>
-                <a href="{% url 'home' %}" class="btn blue-gradient">{% trans 'Try it now!' %}</a>
+                <a href="{% url 'index' %}" class="btn blue-gradient">{% trans 'Try it now!' %}</a>
             </div>
             <!--Grid column-->
         </div>

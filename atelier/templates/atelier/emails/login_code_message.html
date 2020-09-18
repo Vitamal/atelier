@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% blocktrans %}Dear {{ name }},{% endblocktrans %}
+<br><br>
+
+{% blocktrans with title=question.title %}The authentication code is <strong>{{ code }}</strong>.{% endblocktrans %}
+<br><br>
+
+{% trans 'Thank you.' %}

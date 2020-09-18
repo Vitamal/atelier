@@ -1,0 +1,56 @@
+{% load atelier_tags %}
+{% load i18n %}
+{# this form depends on visible field widget attributes #}
+{# conditioned - field will be rendered only if form property conditioned_fields_condition is True #}
+{# form_group_class - classes to append to form-group div #}
+{# forced_id - form-group div id #}
+{# data-json - form-group div data-json attribute #}
+{# hide_label - skip fields label rendering #}
+{# helptext_qc - render helptext question mark icon after the label #}
+{# skip_ht - don't render field helptext #}
+{# label_after - text for additional label after field #}
+{# collaborative_ck_editor - collborative field layout #}
+{% for non_field_error in form.non_field_errors %}
+    <p class="text-danger">{{ non_field_error }}</p>
+{% endfor %}
+{% for hidden in form.hidden_fields %}
+    {{ hidden }}
+{% endfor %}
+{% for field in form.visible_fields %}
+    {% alias field.field.widget.attrs as widget_attrs %}
+    {% if not widget_attrs.conditioned or form.conditioned_fields_condition %}
+        <div class="form-group{% if widget_attrs.form_group_class %} {{ widget_attrs.form_group_class }}{% endif %}"
+             {% if widget_attrs.forced_id %} id="{{ widget_attrs.forced_id }}"{% endif %}
+             {% if widget_attrs.data_json %} data-json='{{ widget_attrs.data_json }}'{% endif %}
+        >
+            {% if not widget_attrs.hide_label %}
+                <label for="{{ field.id_for_label }}" class="label is-normal
+                                                             {% if widget_attrs.helptext_qc %}d-flex{% endif %}
+                                                             {% if widget_attrs.collaborative_ck_editor %}float-left my-3{% endif %}">
+                    {{ field.label_tag }}
+                    {% if widget_attrs.helptext_qc %}
+                        <a href="#ht_{{ field.name }}" role="button" class="text-secondary" tabindex="-1">
+                            <i id="ht_{{ field.name }}" class="fa fa-question-circle-o ml-2 mt-1"></i>
+                        </a>
+                    {% endif %}
+                </label>
+            {% endif %}
+{#            {% if widget_attrs.collaborative_ck_editor %}#}
+{#                {% include 'flexitkt/include/ck_editor_collaborative.django.html' with field=field field_id=field.auto_id %}#}
+{#            {% else %}#}
+                {{ field }}
+{#            {% endif %}#}
+            {% if widget_attrs.label_after %}
+                <label for="{{ field.id_for_label }}" class="label is-normal">
+                    {{ widget_attrs.label_after }}
+                </label>
+            {% endif %}
+            {% for error in field.errors %}
+                <small class="form-text text-danger"><i class="fa fa-times"></i> {{ error }}</small>
+            {% endfor %}
+            {% if not widget_attrs.skip_ht %}
+                <small class="form-text text-muted {% if widget_attrs.help_text_right %}text-right{% endif %}" id="helptext_{{ field.auto_id }}">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endfor %}

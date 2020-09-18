@@ -1,0 +1,38 @@
+{% extends 'base/one_column_layout.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Confirm code' %}{% endblock title %}
+{% block one-column-content %}
+    <div class="card">
+        <div class="card-header">
+            <h5>{% trans 'Log in with a one-time code you have sent' %}</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1">
+                    <p class="h5 mb-5">
+                        {% trans 'One-time log in code for' %} {% if phone_number %}{{ phone_number }}{% else %}{{ email }}{% endif %}
+                    </p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {% include 'atelier/include/form-partial.html' with form=form %}
+                        <button class="btn btn-primary btn-block" type="submit">{% trans 'Log in' %}</button>
+                    </form>
+                    <div class="my-5">
+                        <p class="h5">{% trans 'Information' %}:</p>
+                        <ul>
+                            <li>{% trans 'The code is valid only for 5 minutes and 3 attempts' %}</li>
+                            <li>{% trans 'The code should arrive within seconds, but on a rare occasion it may take a few minutes' %}</li>
+                            <li>{% trans 'If you waited for more than 5 minutes, something has gone wrong. Please use the button below.' %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-12 col-md-10 offset-md-1">
+                    <a href="{% url 'code_not_received' user_id=user.id type=login_type %}" class="btn btn-secondary btn-block under-development">{% trans 'I have not received my code' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock one-column-content %}

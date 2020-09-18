@@ -1,0 +1,22 @@
+{% extends 'atelier/register_base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Register' %}{% endblock title %}
+
+{% block page-cover-title %}{% trans 'Create account' %}{% endblock page-cover-title %}
+
+{% block content %}
+    <div class="container container-md w-50">
+        <form class="container mt-4" action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            {% include 'atelier/include/form-partial.html' with form=form %}
+            <button class="btn btn-primary btn-block" type="submit">{% trans 'Register' %}</button>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block includes-js %}
+    {{ block.super }}
+    <script src="{% static 'atelier/js/include/friendly_password.js' %}"></script>
+{% endblock includes-js %}

@@ -1,0 +1,18 @@
+{% extends 'base/single_line_page.html' %}
+{% load i18n %}
+
+{% block navbar-start %}
+    {{ block.super }}
+    {% if user.is_authenticated %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% trans 'More' %}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a href="{% url 'files' %}" class="dropdown-item {% block files_link_bem_block %}{% endblock %}">{% trans 'Files' %}</a>
+            <a href="{% url 'picker' %}" class="dropdown-item {% block picker_link_bem_block %}{% endblock %}">{% trans 'Picker' %}</a>
+        </div>
+    </li>
+    {% endif %}
+{% endblock %}

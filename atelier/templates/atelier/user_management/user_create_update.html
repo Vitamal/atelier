@@ -3,14 +3,11 @@
 {% load static %}
 
 {% block title %}{% trans 'Atelier users' %}{% endblock %}
-
-<!-- Material form register -->
 {% block content-main %}
 
     <div class="card card-form mt-2 mb-4">
-
         <!--Card content-->
-        <div class="card-body rounded-top blue darken-4">
+        <div class="card-body rounded-top blue darken-4 text-white">
             {% if user_to_manage %}
                 <div class="h4">
                     {% if user_to_manage.first_name or user_to_manage.last_name or user_to_manage.email %}
@@ -22,7 +19,7 @@
                     {% endif %}
                     {% if user_to_manage.is_superuser %} ({% trans 'admin' %}){% endif %}
                 </div>
-                <small class="text-muted">
+                <small class="text-white">
                     {% trans 'Joined on:' %} {{ user_to_manage.date_joined }}
                     {% if user_to_manage.last_login %}
                         {% trans 'Last login on:' %} {{ user_to_manage.last_login }}
@@ -34,122 +31,35 @@
                 <h3 class="font-weight-bold text-center text-uppercase text-white mt-4">{% trans 'Create user' %}</h3>
             {% endif %}
 
-
             <!-- Form -->
             <form class="pb-3 px-4" method="post">
                 {% csrf_token %}
                 {% for non_field_error in form.non_field_errors %}
                     <p class="text-danger">{{ non_field_error }}</p>
                 {% endfor %}
-
                 {% for field in form %}
-
-                    <div class="md-form">
-{#                        <div class="form-group">#}
-                                {{ field }}
-                                {% if not field.field.widget.attrs.hide_label %}
-                                    <label for="{{ field.id_for_label }}"
-                                           class="text-white">{{ field.label }}</label>
-                                {% endif %}
-                            {% for error in field.errors %}<p class="text-danger">{{ error }}</p>{% endfor %}
-                            <small>
+                    <div class="{% if field.field.widget.input_type == 'checkbox' %} form-check {% elif field.field.widget.input_type == 'select' %} mdb-select mt-3{% else %} md-form {% endif %}">
+                        {{ field }}
+                        {% if not field.field.widget.attrs.hide_label %}
+                            <label for="{{ field.id_for_label }}"
+                                   class="text-white">{{ field.label }}</label>
+                        {% endif %}
+                        {% for error in field.errors %}<p class="text-danger">{{ error }}</p>{% endfor %}
+                        <small>
                                         <span class="text-white" id="helptext_{{ field.auto_id }}">
                                             {{ field.help_text }}
                                         </span>
-                            </small>
-                        </div>
+                        </small>
                     </div>
                 {% endfor %}
-            <!-- Material unchecked -->
-<div class="form-check">
-    <input type="checkbox" class="form-check-input" id="materialUnchecked">
-    <label class="form-check-label" for="materialUnchecked">Material unchecked</label>
-</div>
-
-                {#                <!-- First name -->#}
-                {#                <div class="md-form">#}
-                {#                    <i class="far fa-user prefix text-white"></i>#}
-                {#                    <input type="text" id="materialRegisterFormFirstName" class="form-control text-white">#}
-                {#                    <label class="text-white" for="materialRegisterFormFirstName">{% trans 'First name' %}</label>#}
-                {#                </div>#}
-                {#                <!-- Last name -->#}
-                {#                <div class="md-form">#}
-                {#                    <i class="far fa-hand-point-right prefix text-white"></i>#}
-                {#                    <input type="email" id="materialRegisterFormLastName" class="form-control text-white">#}
-                {#                    <label class="text-white" for="materialRegisterFormLastName">Last name</label>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- E-mail -->#}
-                {#                <div class="md-form mt-0">#}
-                {#                    <i class="far fa-envelope prefix text-white"></i>#}
-                {#                    <input type="email" id="materialRegisterFormEmail" class="form-control text-white">#}
-                {#                    <label class="text-white" for="materialRegisterFormEmail">E-mail</label>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- Password -->#}
-                {#                <div class="md-form">#}
-                {#                    <i class="far fa-star prefix text-white"></i>#}
-                {#                    <input type="password" id="materialRegisterFormPassword" class="form-control text-white"#}
-                {#                           aria-describedby="materialRegisterFormPasswordHelpBlock">#}
-                {#                    <label class="text-white" for="materialRegisterFormPassword">Password</label>#}
-                {#                    <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-white">#}
-                {#                        At least 8 characters and 1 digit#}
-                {#                    </small>#}
-                {#                </div>#}
-
                 <div class="mb-3">
-                    <button class="btn btn-primary" type="submit">{% trans 'Save user' %}</button>
-                    <a class="btn btn-warning" href="
-
-
+                    <button class="btn blue-gradient" type="submit">{% trans 'Save user' %}</button>
+                    <a class="btn peach-gradient" href="
                             {% if cancel_url %}{{ cancel_url }}{% else %}{% url 'user_management' %}{% endif %}">{% trans 'Cancel' %}</a>
                 </div>
             </form>
             <!-- Form -->
-
         </div>
-
-        <div class="card card-form-2 mb-0 z-depth-0">
-            <div class="card-body">
-
-                <!-- Form -->
-                <form class="text-center">
-
-                    <!-- Newsletter -->
-                    <div class="form-check my-3">
-                        <input type="checkbox" class="form-check-input filled-in" id="materialRegisterFormNewsletter">
-                        <label class="form-check-label" for="materialRegisterFormNewsletter">Subscribe to our
-                            newsletter</label>
-                    </div>
-
-                    <!-- Sign up button -->
-                    <button class="btn btn-outline-red-accent btn-rounded btn-block my-4 waves-effect z-depth-0"
-                            type="submit">Sign in
-                    </button>
-
-                    <!-- Social register -->
-                    <p>or sign up with:</p>
-
-                    <i class="fab fa-lg fa-facebook-f pink-accent-text px-2"></i>
-                    <i class="fab fa-lg fa-twitter pink-accent-text px-2"></i>
-                    <i class="fab fa-lg fa-linkedin-in pink-accent-text px-2"></i>
-                    <i class="fab fa-lg fa-github pink-accent-text px-2"></i>
-
-                    <hr>
-
-                    <!-- Terms of service -->
-                    <p>By clicking
-                        <em>Sign up</em> you agree to our
-                        <a class="pink-accent-text" href="#!" target="_blank">terms of service</a> and
-                        <a class="pink-accent-text" href="#!" target="_blank">terms of service</a>. </p>
-
-                </form>
-                <!-- Form -->
-
-            </div>
-        </div>
-
     </div>
     <!-- Material form register -->
 {% endblock content-main %}
-

@@ -1,0 +1,14 @@
+{% extends "flexitkt_messages/basemessage_email/basemessage_email.django.html" %}
+{% load i18n %}
+{% load flexitkt_email_tags %}
+
+
+{% block contents %}
+    {{ block.super }}
+    {% if attachment_links|length > 0 %}
+        <h4>{% blocktrans %} Attachments {% endblocktrans %}:</h4>
+        {% for link in attachment_links %}
+            <a href='{{ link.link }}'>{{ link.title }}</a><br>
+        {% endfor %}
+    {% endif %}
+{% endblock contents %}

@@ -1,0 +1,24 @@
+{% extends 'base/one_column_layout.html' %}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block one-column-content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="card mb-2">
+            <div class="card-header">
+                <div class="h4">{{ title }}</div>
+            </div>
+            <div class="card-body">
+                {% include 'atelier/include/form-partial.html' with form=form %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">{{ submit_title }}</button>
+            {% if cancel_url %}
+                <a class="btn btn-warning" href="{{ cancel_url }}">{% trans 'Cancel' %}</a>
+            {% endif %}
+        </div>
+    </form>
+{% endblock one-column-content %}

@@ -18,10 +18,8 @@
         {% for user in page_obj %}
             <!--Grid column-->
             <div class="col-lg-4 col-md-12 mb-4">
-                <!--Card-->
                 <!-- Card -->
                 <div class="card testimonial-card">
-
                     <!-- Background color -->
                     <div class="card-up aqua-gradient"></div>
 
@@ -43,7 +41,12 @@
                         <p><i class="far fa-envelope"></i> {{ user.email }}</p>
                         {% if user.is_administrator or user.is_superuser %}
                             <p><i class="fas fa-user-cog"></i> {% trans 'Atelier administrator' %}</p>
+                        {% else %} <i class="fab fa-centos"></i>
                         {% endif %}
+                        <div class="mb-3 text-right">
+                            <a class="btn-sm primary" href="{% url 'user_management_edit' user_id=user.id %}">{% trans 'Edit user' %}</a>
+                        </div>
+
                     </div>
 
                 </div>

@@ -41,11 +41,17 @@ INSTALLED_APPS = [
     # 3rd party packages
     'rest_framework',
     'rest_framework_api_key',
+    # 'djmoney',
+    # 'formtools',
+    'channels',
     'django_admin_listfilter_dropdown',
+    'django_rq',
+    'ievv_opensource.ievv_sms',
     'django_filters',
 
     # local apps
     'atelier',
+    'atelier.generic_token_with_metadata'
 ]
 
 MIDDLEWARE = [
@@ -157,3 +163,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+FULL_SEARCH_LANGUAGE = os.environ.get('FULL_SEARCH_LANGUAGE', 'ukrainian')
+
+DEFAULT_FROM_EMAIL = 'noreply@test.com'
+
+ATELIER__SITE_ADMIN_EMAILS = os.environ.get('FLEXITKT_SITE_ADMIN_EMAILS', ['admin@flexitkt.xyz'])

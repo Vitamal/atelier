@@ -1,0 +1,32 @@
+{% extends "flexitkt_email/html_message_base.django.html" %}
+{% load i18n %}
+{% load flexitkt_email_tags %}
+
+{% block header-wrapper %}
+    {% if include_header %}
+        {{ block.super }}
+    {% endif %}
+{% endblock header-wrapper %}
+
+{% block header %}
+    {% if email_heading %}
+        <span style="{{ logo_style }}">
+            {{ email_heading }}
+        </span>
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock header %}
+
+{% block contents %}
+    {{ message.message_content_html|safe }}
+    <p>{% blocktrans %}This is a system generated email from the {{site_domain}} application.{% endblocktrans %}</p>
+{% endblock contents %}
+
+{% block footer %}
+  {% block unsubscribe_message %}
+    {% if unsubscribe_message %}
+      {{ unsubscribe_message|safe }}
+    {% endif %}
+  {% endblock unsubscribe_message %}
+{% endblock footer %}

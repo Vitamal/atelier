@@ -1,0 +1,1 @@
+from .friendly_password_input import FriendlyPasswordInputWidget

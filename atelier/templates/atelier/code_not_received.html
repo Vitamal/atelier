@@ -1,0 +1,26 @@
+{% extends 'base/one_column_layout.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Haven't received my code"  %}{% endblock title %}
+{% block one-column-content %}
+    <div class="alert alert-success"><p>
+        {% trans "Hi" %}, {{ user.get_full_name }}.
+    </p>
+        <p>
+            {% trans 'We have notified site admin about the difficulties you experienced while trying to log in.' %}
+        </p>
+        <p>
+            {% if login_type == 'email' %}
+                {% trans 'We suggest you try to login by receiving code to you mobile phone or by providing your password.' %}
+            {% else %}
+                {% trans 'We suggest you try to login by receiving code to you email or by providing your password.' %}
+            {% endif %}
+        </p>
+        <p><a href="{% url 'login' %}">{% trans 'Click here to log in' %}</a></p>
+        <p>
+            {% trans 'If you forgot your password, you can reset it here' %}:
+            <a href="{% url 'reset_password' %}">{% trans 'reset your password' %}</a>
+        </p>
+        <p>{% trans 'Further you can contact our support by calling' %} <strong>{{ support_phone_number }}</strong>.</p>
+        <p>{% trans "We apologise for the inconvenience. Flexit administration." %}</p></div>
+{% endblock one-column-content %}

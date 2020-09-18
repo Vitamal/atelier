@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, ModelFormMixin, Pr
 
 from ...models import User
 from ..user_managment.forms.create_update_user_form import UserCreateForm, UserUpdateForm
-from ..view_mixins import UserManagementAccessMixin
+from ..view_mixins import UserManagementAccessMixin, RedirectSuccessMixin
 
 
 class UserCreateUpdateMixin(UserManagementAccessMixin, ModelFormMixin, ProcessFormView):
@@ -17,8 +17,11 @@ class UserCreateUpdateMixin(UserManagementAccessMixin, ModelFormMixin, ProcessFo
         return reverse('user_management')
 
 
-class UserCreateView(UserCreateUpdateMixin, CreateView):
+class UserCreateView(RedirectSuccessMixin, UserCreateUpdateMixin, CreateView):
     form_class = UserCreateForm
+
+    def get_basic_cancel_url(self):
+        return reverse('user_management')
 
     def get_initial(self):
         """
