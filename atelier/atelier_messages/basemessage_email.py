@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.template.loader import render_to_string
 
-from flexitkt.flexitkt_email.emailutils import AbstractEmail
+from atelier.atelier_email.emailutils import AbstractEmail
 
 
 class BaseMessageEmail(AbstractEmail):
-    html_message_template = 'flexitkt_messages/basemessage_email/basemessage_email.django.html'
+    html_message_template = 'atelier_messages/basemessage_email/basemessage_email.html'
     unsubscribe_message_template = None
 
     def __init__(self, message, message_receiver, email_heading=None, include_header=True, *args, **kwargs):
@@ -25,7 +25,7 @@ class BaseMessageEmail(AbstractEmail):
         context_data['email_heading'] = self.email_heading
         context_data['include_header'] = self.include_header
         context_data['unsubscribe_message'] = self.render_unsubscribe_message()
-        context_data['site_domain'] = settings.FLEXITKT_SITE_DOMAIN
+        context_data['site_domain'] = settings.ATELIER_SITE_DOMAIN
         return context_data
 
     @staticmethod

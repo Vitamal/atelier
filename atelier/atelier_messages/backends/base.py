@@ -3,7 +3,7 @@ import traceback
 
 from django.utils import timezone
 
-from flexitkt.flexitkt_messages.models import MessageReceiver
+from atelier.atelier_messages.models import MessageReceiver
 
 
 class AbstractMessageSender(object):

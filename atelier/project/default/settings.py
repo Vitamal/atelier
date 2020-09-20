@@ -51,7 +51,9 @@ INSTALLED_APPS = [
 
     # local apps
     'atelier',
-    'atelier.generic_token_with_metadata'
+    'atelier.generic_token_with_metadata',
+    'atelier.atelier_email',
+    'atelier.atelier_messages',
 ]
 
 MIDDLEWARE = [
@@ -166,6 +168,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 FULL_SEARCH_LANGUAGE = os.environ.get('FULL_SEARCH_LANGUAGE', 'ukrainian')
 
+ATELIER_SITENAME = 'Atelier'
+
+ATELIER_SITE_DOMAIN = os.environ.get('ATELIER_SITE_DOMAIN', 'localhost:8000')
+
 DEFAULT_FROM_EMAIL = 'noreply@test.com'
 
-ATELIER__SITE_ADMIN_EMAILS = os.environ.get('FLEXITKT_SITE_ADMIN_EMAILS', ['admin@flexitkt.xyz'])
+ATELIER__SITE_ADMIN_EMAILS = os.environ.get('ATELIER_SITE_ADMIN_EMAILS', ['admin@atelier.xyz'])

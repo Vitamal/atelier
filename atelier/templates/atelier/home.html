@@ -107,6 +107,16 @@
             </div>
             <!--Grid column-->
         </div>
+        {% load atelier_email_tags %}
+        {% atelier_email_secondary_buttonlink "http://example.com"  %}
+            A secondary button link
+        {% end_atelier_email_secondary_buttonlink %}
+        {% atelier_email_primary_buttonlink "http://example.com" %}
+            A primary button link
+        {% end_atelier_email_primary_buttonlink %}
+        {% atelier_email_link "http://example.com" %}
+            A link
+        {% end_atelier_email_link %}
     </div>
     <!--Main container-->
 {% endblock main %}

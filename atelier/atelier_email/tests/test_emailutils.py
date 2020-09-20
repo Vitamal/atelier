@@ -1,7 +1,7 @@
 from django.core import mail
 from django.test import TestCase
 
-from flexitkt.flexitkt_email import emailutils
+from atelier.atelier_email import emailutils
 
 
 class TestConvertHtmlToPlaintext(TestCase):
@@ -39,25 +39,25 @@ class TestConvertHtmlToPlaintext(TestCase):
 class TestAbstractEmail(TestCase):
     def test_subject(self):
         class MyEmail(emailutils.AbstractEmail):
-            subject_template = 'flexitkt_email_testapp/abstractemail/subject.django.txt'
-            html_message_template = 'flexitkt_email_testapp/abstractemail/html_message.django.html'
+            subject_template = 'atelier_email_testapp/abstractemail/subject.txt'
+            html_message_template = 'atelier_email_testapp/abstractemail/html_message.html'
         MyEmail(recipient='test@example.com', extra_context_data={'name': 'Test'}).send()
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, 'Hello, Test')
 
     def test_subject_prefix(self):
         class MyEmail(emailutils.AbstractEmail):
-            subject_template = 'flexitkt_email_testapp/abstractemail/subject.django.txt'
-            html_message_template = 'flexitkt_email_testapp/abstractemail/html_message.django.html'
-        with self.settings(FLEXITKT_EMAIL_SUBJECT_PREFIX='[Testbrand] '):
+            subject_template = 'atelier_email_testapp/abstractemail/subject.txt'
+            html_message_template = 'atelier_email_testapp/abstractemail/html_message.html'
+        with self.settings(ATELIER_EMAIL_SUBJECT_PREFIX='[Testbrand] '):
             MyEmail(recipient='test@example.com', extra_context_data={'name': 'Test'}).send()
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, '[Testbrand] Hello, Test')
 
     def test_html_message(self):
         class MyEmail(emailutils.AbstractEmail):
-            subject_template = 'flexitkt_email_testapp/abstractemail/subject.django.txt'
-            html_message_template = 'flexitkt_email_testapp/abstractemail/html_message.django.html'
+            subject_template = 'atelier_email_testapp/abstractemail/subject.txt'
+            html_message_template = 'atelier_email_testapp/abstractemail/html_message.html'
         MyEmail(recipient='test@example.com', extra_context_data={'name': 'Test'}).send()
         html_altenative = mail.outbox[0].alternatives[0]
         self.assertEqual(html_altenative[1], 'text/html')
@@ -65,15 +65,15 @@ class TestAbstractEmail(TestCase):
 
     def test_plaintext_message_from_html_message(self):
         class MyEmail(emailutils.AbstractEmail):
-            subject_template = 'flexitkt_email_testapp/abstractemail/subject.django.txt'
-            html_message_template = 'flexitkt_email_testapp/abstractemail/html_message.django.html'
+            subject_template = 'atelier_email_testapp/abstractemail/subject.txt'
+            html_message_template = 'atelier_email_testapp/abstractemail/html_message.html'
         MyEmail(recipient='test@example.com', extra_context_data={'name': 'Test'}).send()
         self.assertEqual(mail.outbox[0].body.strip(), 'Hello\n\nWorld\n\nTest')
 
     def test_plaintext_message_from_template(self):
         class MyEmail(emailutils.AbstractEmail):
-            subject_template = 'flexitkt_email_testapp/abstractemail/subject.django.txt'
-            html_message_template = 'flexitkt_email_testapp/abstractemail/html_message.django.html'
-            plaintext_message_template = 'flexitkt_email_testapp/abstractemail/plaintext_message.django.txt'
+            subject_template = 'atelier_email_testapp/abstractemail/subject.txt'
+            html_message_template = 'atelier_email_testapp/abstractemail/html_message.html'
+            plaintext_message_template = 'atelier_email_testapp/abstractemail/plaintext_message.txt'
         MyEmail(recipient='test@example.com', extra_context_data={'name': 'Test'}).send()
         self.assertEqual(mail.outbox[0].body.strip(), 'Hello PlainText World Test')

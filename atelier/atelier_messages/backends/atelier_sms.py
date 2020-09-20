@@ -1,11 +1,11 @@
 from ievv_opensource.ievv_sms.sms_registry import send_sms
 
-from flexitkt.flexitkt_messages.backends import base
+from atelier.atelier_messages.backends import base
 
 
-class FlexitSmsMessageSender(base.AbstractMessageSender):
+class AtelierSmsMessageSender(base.AbstractMessageSender):
     """
-    Send SMS using flexit_sms.
+    Send SMS using atelier_sms.
     """
     message_type = 'sms'
 

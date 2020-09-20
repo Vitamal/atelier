@@ -1,7 +1,7 @@
 from django import test
 
-from flexitkt.flexitkt_messages.backends.base import AbstractMessageSender
-from flexitkt.flexitkt_messages import backend_registry
+from atelier.atelier_messages.backends.base import AbstractMessageSender
+from atelier.atelier_messages import backend_registry
 
 
 class MockMessageSender(AbstractMessageSender):
@@ -15,13 +15,13 @@ class TestBackendRegistry(test.TestCase):
     def test_set_backend(self):
         mockregistry = backend_registry.MockableRegistry()
         self.assertEqual(mockregistry.get_pretty_classpath(),
-                         'flexitkt.flexitkt_messages.backend_registry.MockableRegistry')
+                         'atelier.atelier_messages.backend_registry.MockableRegistry')
 
     def test_get_message_sender_class_not_in_registry(self):
         mockregistry = backend_registry.MockableRegistry()
         with self.assertRaisesMessage(ValueError,
                                       'mock_message_sender not in '
-                                      'flexitkt.flexitkt_messages.backend_registry.MockableRegistry'):
+                                      'atelier.atelier_messages.backend_registry.MockableRegistry'):
             mockregistry.get(message_type='mock_message_sender')
 
     def test_get_message_sender(self):
@@ -45,7 +45,7 @@ class TestBackendRegistry(test.TestCase):
         mockregistry.add(message_sender_class=MockMessageSender)
         with self.assertRaisesMessage(ValueError,
                                       'mock_message_sender already added to '
-                                      'flexitkt.flexitkt_messages.backend_registry.MockableRegistry'):
+                                      'atelier.atelier_messages.backend_registry.MockableRegistry'):
             mockregistry.add(message_sender_class=MockMessageSender)
 
     def test_add(self):
@@ -58,7 +58,7 @@ class TestBackendRegistry(test.TestCase):
         mockregistry = backend_registry.MockableRegistry()
         with self.assertRaisesMessage(ValueError,
                                       'mock_message_sender not in '
-                                      'flexitkt.flexitkt_messages.backend_registry.MockableRegistry'):
+                                      'atelier.atelier_messages.backend_registry.MockableRegistry'):
             mockregistry.remove(message_type='mock_message_sender')
 
     def test_remove(self):

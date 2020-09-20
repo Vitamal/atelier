@@ -1,7 +1,7 @@
 import requests
 from django.conf import settings
 
-from flexitkt.flexitkt_messages.backends import base
+from atelier.atelier_messages.backends import base
 
 
 class MailgunApiEmailMessageSender(base.AbstractMessageSender):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from flexitkt.flexitkt_messages import basemessage_admin
-from flexitkt.flexitkt_messages.models import MessageReceiver, BaseMessage, SystemMessage, BaseMessageAttachment
+from atelier.atelier_messages import basemessage_admin
+from atelier.atelier_messages.models import MessageReceiver, BaseMessage, SystemMessage, BaseMessageAttachment
 
 
 class MessageReceiverAdmin(admin.ModelAdmin):

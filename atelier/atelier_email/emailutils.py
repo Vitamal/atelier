@@ -29,11 +29,11 @@ class AbstractEmail(object):
 
         Simple example::
 
-            from flexitkt.flexitkt_email import emailutils
+            from atelier.atelier_email import emailutils
 
             class SimpleEmail(emailutils.AbstractEmail):
-                subject_template = 'myapp/subject.django.txt'
-                html_message_template = 'myapp/html_message.django.html'
+                subject_template = 'myapp/subject.txt'
+                html_message_template = 'myapp/html_message.html'
 
             SimpleEmail(recipient='test@example.com').send()
 
@@ -52,15 +52,15 @@ class AbstractEmail(object):
         to plaintext::
 
             class WithPlaintextEmail(emailutils.AbstractEmail):
-                subject_template = 'myapp/subject.django.txt'
-                html_message_template = 'myapp/html_message.django.html'
-                plaintext_message_template = 'myapp/plaintext_message.django.txt'
+                subject_template = 'myapp/subject.txt'
+                html_message_template = 'myapp/html_message.html'
+                plaintext_message_template = 'myapp/plaintext_message.txt'
 
         Set subject via a translation string instead of a template
         (you can do this for the message as well)::
 
             class StringSubjectEmail(emailutils.AbstractEmail):
-                html_message_template = 'myapp/html_message.django.html'
+                html_message_template = 'myapp/html_message.html'
 
                 def render_subject(self):
                     return _('My subject')
@@ -85,7 +85,7 @@ class AbstractEmail(object):
     #: is not set in subclasses, we autoconvert the HTML message to plain text.
     plaintext_message_template = None
 
-    #: Fallback value of the FLEXITKT_EMAIL_DEFAULT_CONTEXT_DATA setting
+    #: Fallback value of the ATELIER_EMAIL_DEFAULT_CONTEXT_DATA setting
     #: is not set.
     DEFAULT_CONTEXT_DATA = {
         'body_style': 'background-color: #fff;',
@@ -170,14 +170,14 @@ class AbstractEmail(object):
         """
         Get the prefix to use for the subject.
 
-        Defaults to ``settings.FLEXITKT_EMAIL_SUBJECT_PREFIX``, falling
+        Defaults to ``settings.ATELIER_EMAIL_SUBJECT_PREFIX``, falling
         back to empty string.
 
         If your privide a prefix, you should most likely include an empty
         space at the end of it.
         """
-        if hasattr(settings, 'FLEXITKT_EMAIL_SUBJECT_PREFIX'):
-            return settings.FLEXITKT_EMAIL_SUBJECT_PREFIX
+        if hasattr(settings, 'ATELIER_EMAIL_SUBJECT_PREFIX'):
+            return settings.ATELIER_EMAIL_SUBJECT_PREFIX
         else:
             return ''
 
@@ -231,11 +231,11 @@ class AbstractEmail(object):
         """
         context_data = {
             'from_email': self.from_email,
-            'FLEXITKT_SITENAME': getattr(settings, 'FLEXITKT_SITENAME', 'Flexit'),
-            'FLEXITKT_EMAIL_LOGO_HTML': getattr(settings, 'FLEXITKT_EMAIL_LOGO_HTML', 'Flexit')
+            'ATELIER_SITENAME': getattr(settings, 'ATELIER_SITENAME', 'Atelier'),
+            'ATELIER_EMAIL_LOGO_HTML': getattr(settings, 'ATELIER_EMAIL_LOGO_HTML', 'Atelier')
         }
-        if hasattr(settings, 'FLEXITKT_EMAIL_DEFAULT_CONTEXT_DATA'):
-            context_data.update(settings.FLEXITKT_EMAIL_DEFAULT_CONTEXT_DATA)
+        if hasattr(settings, 'ATELIER_EMAIL_DEFAULT_CONTEXT_DATA'):
+            context_data.update(settings.ATELIER_EMAIL_DEFAULT_CONTEXT_DATA)
         else:
             context_data.update(self.DEFAULT_CONTEXT_DATA)
         return context_data
@@ -248,9 +248,9 @@ class AbstractEmail(object):
         By default this returns:
 
         - ``from_email``.
-        - ``FLEXITKT_SITENAME`` (if set as a Django setting).
+        - ``ATELIER_SITENAME`` (if set as a Django setting).
         - anything you send as the ``extra_context_data`` argument to the constructor.
-        - Anything in the ``FLEXITKT_EMAIL_DEFAULT_CONTEXT_DATA`` setting.
+        - Anything in the ``ATELIER_EMAIL_DEFAULT_CONTEXT_DATA`` setting.
         """
         context_data = self.get_default_context_data()
         if self.extra_context_data:

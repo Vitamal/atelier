@@ -1,20 +1,20 @@
 from django import test
 
-from flexitkt.flexitkt_messages import messageclass_registry
-from flexitkt.flexitkt_messages.models import BaseMessage
+from atelier.atelier_messages import messageclass_registry
+from atelier.atelier_messages.models import BaseMessage
 
 
 class TestMessageClassRegistry(test.TestCase):
     def test_set_backend(self):
         mockregistry = messageclass_registry.MockableRegistry()
         self.assertEqual(mockregistry.get_pretty_classpath(),
-                         'flexitkt.flexitkt_messages.messageclass_registry.MockableRegistry')
+                         'atelier.atelier_messages.messageclass_registry.MockableRegistry')
 
     def test_get_message_class_not_in_registry(self):
         mockregistry = messageclass_registry.MockableRegistry()
         with self.assertRaisesMessage(ValueError,
                                       'mock_message_class not in '
-                                      'flexitkt.flexitkt_messages.messageclass_registry.MockableRegistry'):
+                                      'atelier.atelier_messages.messageclass_registry.MockableRegistry'):
             mockregistry.get(message_class_string='mock_message_class')
 
     def test_get_message_class(self):
@@ -38,7 +38,7 @@ class TestMessageClassRegistry(test.TestCase):
         mockregistry.add(message_class=BaseMessage)
         with self.assertRaisesMessage(ValueError,
                                       '{} already added to '
-                                      'flexitkt.flexitkt_messages.messageclass_registry.MockableRegistry'.format(
+                                      'atelier.atelier_messages.messageclass_registry.MockableRegistry'.format(
                                           BaseMessage.get_message_class_string())):
             mockregistry.add(message_class=BaseMessage)
 
@@ -51,7 +51,7 @@ class TestMessageClassRegistry(test.TestCase):
     def test_remove_not_in_registry(self):
         mockregistry = messageclass_registry.MockableRegistry()
         with self.assertRaisesMessage(ValueError, '{} not in '
-                                                  'flexitkt.flexitkt_messages.messageclass_registry.MockableRegistry'
+                                                  'atelier.atelier_messages.messageclass_registry.MockableRegistry'
                 .format(BaseMessage.get_message_class_string())):
             mockregistry.remove(message_class_string=BaseMessage.get_message_class_string())
 

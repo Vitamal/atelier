@@ -3,9 +3,9 @@ from ievv_opensource.utils.singleton import Singleton
 
 class Registry(Singleton):
     """
-    Registry of flexitkt_messagees message sender types.
+    Registry of atelier_messagees message sender types.
 
-    Holds exactly one subclass of :class:`.flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender` for each
+    Holds exactly one subclass of :class:`.atelier.atelier_messagees.backends.base.AbstractMessageSender` for each
     `message_type`.
 
     Outside tests you will not instantiate this, but rather use::
@@ -25,7 +25,7 @@ class Registry(Singleton):
     def __iter__(self):
         """
         Iterate over the registry yielding
-        subclasses of :class:`.flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender`.
+        subclasses of :class:`.atelier.atelier_messagees.backends.base.AbstractMessageSender`.
         """
         return iter(self._backend_sender_classes.values())
 
@@ -37,11 +37,11 @@ class Registry(Singleton):
 
     def get(self, message_type):
         """
-        Get a subclass of :class:`.flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender` stored in the
+        Get a subclass of :class:`.atelier.atelier_messagees.backends.base.AbstractMessageSender` stored in the
         registry by the ``message_type``
 
         Args:
-            message_type (str): A :obj:`.flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender.message_type`.
+            message_type (str): A :obj:`.atelier.atelier_messagees.backends.base.AbstractMessageSender.message_type`.
         """
         if message_type not in self:
             raise ValueError('{} not in {}'.format(message_type, self.get_pretty_classpath()))
@@ -53,11 +53,11 @@ class Registry(Singleton):
 
         Args:
             message_sender_class: A subclass of
-                :class:`.flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender`.
+                :class:`.atelier.atelier_messagees.backends.base.AbstractMessageSender`.
 
         Raises:
             ValueError: When a message sender class with the same
-                :obj:`.flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender.message_type` already exists in
+                :obj:`.atelier.atelier_messagees.backends.base.AbstractMessageSender.message_type` already exists in
                 the registry.
         """
         if message_sender_class.get_message_type() in self:
@@ -70,7 +70,7 @@ class Registry(Singleton):
         Remove the message sender class with the provided `message_type` from the registry.
 
         Args:
-            message_type (str): A :obj:`.flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender.message_type`.
+            message_type (str): A :obj:`.atelier.atelier_messagees.backends.base.AbstractMessageSender.message_type`.
         """
         if message_type not in self:
             raise ValueError('{} not in {}'.format(message_type, self.get_pretty_classpath()))
@@ -94,8 +94,8 @@ class MockableRegistry(Registry):
 
             from django import test
             from unittest import mock
-            from flexitkt.flexitkt_messagees.backends.base import AbstractMessageSender
-            from flexitkt.flexitkt_messagees import backend_registry
+            from atelier.atelier_messagees.backends.base import AbstractMessageSender
+            from atelier.atelier_messagees import backend_registry
 
             class TestSomething(test.TestCase):
                 def test_something(self):
@@ -108,13 +108,13 @@ class MockableRegistry(Registry):
                     mockregistry = backend_registry.MockableRegistry.make_mockregistry(
                         Mock1, Mock2)
 
-                    with mock.patch('flexitkt.flexitkt_messagees.backend_registry.Registry.get_instance',
+                    with mock.patch('atelier.atelier_messagees.backend_registry.Registry.get_instance',
                                     lambda: mockregistry):
                         pass  # Your test code here
 
         Args:
             *message_sender_classes: Zero or more
-                :class:`flexitkt.flexitkt_messagees.backends.base.AbstractMessageSender`
+                :class:`atelier.atelier_messagees.backends.base.AbstractMessageSender`
                 subclasses.
         Returns:
             An object of this class with the requested message_sender_classes registered.

@@ -1,0 +1,7 @@
+<span style="{{ logo_style }}" title="{{ ATELIER_SITENAME }}">
+    {% if ATELIER_EMAIL_LOGO_HTML %}
+            {{ ATELIER_EMAIL_LOGO_HTML|safe }}
+    {% else %}
+        {{ ATELIER_SITENAME }}
+    {% endif %}
+</span>

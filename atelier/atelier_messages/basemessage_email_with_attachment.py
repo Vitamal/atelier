@@ -1,9 +1,9 @@
 from django.template.loader import render_to_string
-from flexitkt.flexitkt_email.emailutils import AbstractEmail
+from atelier.atelier_email.emailutils import AbstractEmail
 
 
 class BaseMessageEmailWithAttachments(AbstractEmail):
-    html_message_template = 'flexitkt_messages/basemessage_email/basemessage_email_with_attachment.django.html'
+    html_message_template = 'atelier_messages/basemessage_email/basemessage_email_with_attachment.html'
     unsubscribe_message_template = None
 
     def __init__(self, message, message_receiver, attachment_ids=None, attachment_links=None, email_heading=None, include_header=True, *args, **kwargs):

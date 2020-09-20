@@ -5,8 +5,8 @@ from flexitkt.flexitkt_email import emailutils
 
 
 class DemoEmail(emailutils.AbstractEmail):
-    subject_template = 'flexitkt_email/flexitkt_email_send_testmail/subject.django.txt'
-    html_message_template = 'flexitkt_email/flexitkt_email_send_testmail/html_message.django.html'
+    subject_template = 'atelier_email/atelier_email_send_testmail/subject.txt'
+    html_message_template = 'atelier_email/atelier_email_send_testmail/html_message.html'
 
     def get_context_data(self):
         context = super(DemoEmail, self).get_context_data()

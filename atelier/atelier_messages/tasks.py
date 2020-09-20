@@ -8,7 +8,7 @@ def prepare_message(message_id, message_class_string, send_when_prepared=False):
     Prepares message for sending.
 
     Will call the :func:`~.send_message` RQ-task and send the message if
-    :obj:`~.flexitkt.flexitkt_messages.models.BaseMessage.requested_send_datetime` is ``None``.
+    :obj:`~.atelier.atelier_messages.models.BaseMessage.requested_send_datetime` is ``None``.
 
     This task does the following:
         1. Get the message to send. If this fails it means that the message is still locked on the DB-level, or that
@@ -17,7 +17,7 @@ def prepare_message(message_id, message_class_string, send_when_prepared=False):
         If 1. is OK, then:
 
             2. The status is set to ``preparing``.
-            3. :obj:`~.flexitkt.flexitkt_messages.models.MessageReceiver``s are created for the message.
+            3. :obj:`~.atelier.atelier_messages.models.MessageReceiver``s are created for the message.
             4. Status is set to ``queued_for_sending``.
 
         If ``message.requested_send_datetime`` is ``None`` nothing is done and the status
@@ -34,8 +34,8 @@ def prepare_message(message_id, message_class_string, send_when_prepared=False):
     """
     from django.db import transaction
     from django.conf import settings
-    from flexitkt.flexitkt_messages.models import BaseMessage
-    from flexitkt.flexitkt_messages import messageclass_registry
+    from atelier.atelier_messages.models import BaseMessage
+    from atelier.atelier_messages import messageclass_registry
     import logging
     logger = logging.getLogger(__name__)
 
@@ -98,13 +98,13 @@ def prepare_message(message_id, message_class_string, send_when_prepared=False):
     # Send message
     if send_when_prepared and message.status == BaseMessage.STATUS_CHOICES.QUEUED_FOR_SENDING.value \
             and message.requested_send_datetime is None:
-        if getattr(settings, 'FLEXITKT_MESSAGES_QUEUE_IN_REALTIME', True):
+        if getattr(settings, 'ATELIER_MESSAGES_QUEUE_IN_REALTIME', True):
             send_message(message_id=message_id, message_class_string=message_class_string)
 
 
 def _handle_get_message_failure(logger, message_class, message_class_string, message_id,
                                 attempt_number):
-    from flexitkt.flexitkt_messages.models import BaseMessage
+    from atelier.atelier_messages.models import BaseMessage
 
     try:
         message = message_class.objects.filter(id=message_id)
@@ -141,11 +141,11 @@ def send_message(message_id, message_class_string, attempt_number=0):
         3. Call backends for each message_type in ``message.message_types``, and sent to `MessageReceiver`s.
            MessageReceiver
     """
-    from flexitkt.flexitkt_messages import backend_registry
+    from atelier.atelier_messages import backend_registry
     from django.db import transaction
-    from flexitkt.flexitkt_messages.models import BaseMessage
-    from flexitkt.flexitkt_messages import messageclass_registry
-    from flexitkt.flexitkt_messages.models import MessageReceiver
+    from atelier.atelier_messages.models import BaseMessage
+    from atelier.atelier_messages import messageclass_registry
+    from atelier.atelier_messages.models import MessageReceiver
     import logging
     logger = logging.getLogger(__name__)
 

@@ -8,10 +8,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 from django.db import models
 from django.db.models import TextField, PositiveIntegerField
-from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy
-from flexitkt.flexitkt_email import emailutils
+from atelier.atelier_email import emailutils
 from ievv_opensource.utils import choices_with_meta
 
 from . import basemessage_email, messageframework_settings
@@ -436,7 +435,7 @@ class BaseMessage(models.Model):
         self.save()
 
         # Prepare sending with RQ task.
-        if getattr(settings, 'FLEXITKT_MESSAGES_QUEUE_IN_REALTIME', True):
+        if getattr(settings, 'ATELIER_MESSAGES_QUEUE_IN_REALTIME', True):
             django_rq.get_queue(messageframework_settings.get_rq_queue_name())\
                 .enqueue(prepare_message,
                          message_id=self.id,
@@ -468,7 +467,7 @@ class BaseMessage(models.Model):
             self.status = self.STATUS_CHOICES.QUEUED_FOR_SENDING.value
             self.clean()
             self.save()
-            if getattr(settings, 'FLEXITKT_MESSAGES_QUEUE_IN_REALTIME', True):
+            if getattr(settings, 'ATELIER_MESSAGES_QUEUE_IN_REALTIME', True):
                 django_rq.get_queue(messageframework_settings.get_rq_queue_name())\
                     .enqueue(send_message,
                              message_id=self.id,

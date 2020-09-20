@@ -1,1 +1,1 @@
-default_app_config = 'flexitkt.flexitkt_messages.apps.FlexitktMessagesAppConfig'
+default_app_config = 'atelier.atelier_messages.apps.AtelierMessagesAppConfig'

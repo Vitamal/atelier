@@ -1,20 +1,19 @@
-{% extends "flexitkt_email/html_message_base.django.html" %}
-{% load flexitkt_email_tags %}
+{% extends "atelier_email/html_message_base.html" %}
+{% load atelier_email_tags %}
+
 {% block contents %}
     This is a test, {{ name }}
     <br><br>
-
-    {% flexitkt_email_link "http://example.com" %}
+    {% atelier_email_link "http://example.com" %}
         A link
-    {% end_flexitkt_email_link %}
+    {% end_atelier_email_link %}
     is sometimes useful!
     <br><br>
 
-    {% flexitkt_email_primary_buttonlink "http://example.com" %}
+    {% atelier_email_primary_buttonlink "http://example.com" %}
         Click here to visit example.com
-    {% end_flexitkt_email_primary_buttonlink %}
+    {% end_atelier_email_primary_buttonlink %}
     <br>
-
     Human rumours lead to the procedure.
     Virtual, delighted processors unearthly deserve a calm, collective alien.
     I gather this hypnosis, it's called chemical metamorphosis.
@@ -27,10 +26,10 @@
     When the captain harvests for earth, all planets question quirky, vital ships.
     <br><br>
 
-    {% with url="http://example.com"  %}
-        {% flexitkt_email_secondary_buttonlink url %}
+    {% with url="http://example.com" %}
+        {% atelier_email_secondary_buttonlink url %}
             A secondary button link
-        {% end_flexitkt_email_secondary_buttonlink %}
+        {% end_atelier_email_secondary_buttonlink %}
     {% endwith %}
 
 {% endblock contents %}

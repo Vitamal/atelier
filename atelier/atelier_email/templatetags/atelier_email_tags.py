@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 register = template.Library()
 
 
-class FlexitktEmailLinkNode(template.Node):
+class AtelierEmailLinkNode(template.Node):
     def __init__(self, nodelist, url, linkstyle_context_variable, template_name):
         if url[0] in ('"', "'"):
             url = url[1:-1]
@@ -35,7 +35,7 @@ class FlexitktEmailLinkNode(template.Node):
         }).strip()
 
 
-def _flexitkt_email_link(parser, token, linkstyle_context_variable, template_name):
+def _atelier_email_link(parser, token, linkstyle_context_variable, template_name):
     try:
         tag_name, url = token.split_contents()
     except ValueError:
@@ -45,19 +45,19 @@ def _flexitkt_email_link(parser, token, linkstyle_context_variable, template_nam
     end_tag = 'end_{}'.format(tag_name)
     nodelist = parser.parse((end_tag,))
     parser.delete_first_token()
-    return FlexitktEmailLinkNode(nodelist=nodelist, url=url,
-                                 linkstyle_context_variable=linkstyle_context_variable,
-                                 template_name=template_name)
+    return AtelierEmailLinkNode(nodelist=nodelist, url=url,
+                                linkstyle_context_variable=linkstyle_context_variable,
+                                template_name=template_name)
 
 
-def _flexitkt_email_buttonlink(parser, token, linkstyle_context_variable):
-    return _flexitkt_email_link(parser=parser, token=token,
+def _atelier_email_buttonlink(parser, token, linkstyle_context_variable):
+    return _atelier_email_link(parser=parser, token=token,
                                linkstyle_context_variable=linkstyle_context_variable,
-                               template_name='flexitkt_email/templatetags/flexitkt_email_buttonlink.django.html')
+                               template_name='atelier_email/templatetags/atelier_email_buttonlink.django.html')
 
 
 @register.tag
-def flexitkt_email_link(parser, token):
+def atelier_email_link(parser, token):
     """
     Render a normal link.
 
@@ -67,27 +67,27 @@ def flexitkt_email_link(parser, token):
 
         .. code-block:: htmldjango
 
-            {% load flexitkt_email_tags %}
-            {% flexitkt_email_link "http://example.com" %}
+            {% load atelier_email_tags %}
+            {% atelier_email_link "http://example.com" %}
                 A link
-            {% end_flexitkt_email_link %}
+            {% end_atelier_email_link %}
 
         Url as context variable:
 
         .. code-block:: htmldjango
 
-            {% load flexitkt_email_tags %}
-            {% flexitkt_email_link someurl %}
+            {% load atelier_email_tags %}
+            {% atelier_email_link someurl %}
                 A link
-            {% end_flexitkt_email_link %}
+            {% end_atelier_email_link %}
     """
-    return _flexitkt_email_link(parser=parser, token=token,
+    return _atelier_email_link(parser=parser, token=token,
                                linkstyle_context_variable='link_style',
-                               template_name='flexitkt_email/templatetags/flexitkt_email_link.django.html')
+                               template_name='atelier_email/templatetags/atelier_email_link.django.html')
 
 
 @register.tag
-def flexitkt_email_primary_buttonlink(parser, token):
+def atelier_email_primary_buttonlink(parser, token):
     """
     Render a link as a primary button.
 
@@ -97,26 +97,26 @@ def flexitkt_email_primary_buttonlink(parser, token):
 
         .. code-block:: htmldjango
 
-            {% load flexitkt_email_tags %}
-            {% flexitkt_email_primary_buttonlink "http://example.com" %}
+            {% load atelier_email_tags %}
+            {% atelier_email_primary_buttonlink "http://example.com" %}
                 A primary button link
-            {% end_flexitkt_email_primary_buttonlink %}
+            {% end_atelier_email_primary_buttonlink %}
 
         Url as context variable:
 
         .. code-block:: htmldjango
 
-            {% load flexitkt_email_tags %}
-            {% flexitkt_email_primary_buttonlink someurl %}
+            {% load atelier_email_tags %}
+            {% atelier_email_primary_buttonlink someurl %}
                 A primary button link
-            {% end_flexitkt_email_primary_buttonlink %}
+            {% end_atelier_email_primary_buttonlink %}
     """
-    return _flexitkt_email_buttonlink(parser, token,
+    return _atelier_email_buttonlink(parser, token,
                                      linkstyle_context_variable='primary_button_link_style')
 
 
 @register.tag
-def flexitkt_email_secondary_buttonlink(parser, token):
+def atelier_email_secondary_buttonlink(parser, token):
     """
     Render a link as a secondary button.
 
@@ -126,19 +126,19 @@ def flexitkt_email_secondary_buttonlink(parser, token):
 
         .. code-block:: htmldjango
 
-            {% load flexitkt_email_tags %}
-            {% flexitkt_email_secondary_buttonlink "http://example.com" %}
+            {% load atelier_email_tags %}
+            {% atelier_email_secondary_buttonlink "http://example.com" %}
                 A secondary button link
-            {% end_flexitkt_email_secondary_buttonlink %}
+            {% end_atelier_email_secondary_buttonlink %}
 
         Url as context variable:
 
         .. code-block:: htmldjango
 
-            {% load flexitkt_email_tags %}
-            {% flexitkt_email_secondary_buttonlink someurl %}
+            {% load atelier_email_tags %}
+            {% atelier_email_secondary_buttonlink someurl %}
                 A secondary button link
-            {% end_flexitkt_email_secondary_buttonlink %}
+            {% end_atelier_email_secondary_buttonlink %}
     """
-    return _flexitkt_email_buttonlink(parser, token,
+    return _atelier_email_buttonlink(parser, token,
                                      linkstyle_context_variable='secondary_button_link_style')
