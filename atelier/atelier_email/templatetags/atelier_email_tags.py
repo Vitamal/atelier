@@ -53,7 +53,7 @@ def _atelier_email_link(parser, token, linkstyle_context_variable, template_name
 def _atelier_email_buttonlink(parser, token, linkstyle_context_variable):
     return _atelier_email_link(parser=parser, token=token,
                                linkstyle_context_variable=linkstyle_context_variable,
-                               template_name='atelier_email/templatetags/atelier_email_buttonlink.django.html')
+                               template_name='atelier_email/templatetags/atelier_email_buttonlink.html')
 
 
 @register.tag
@@ -83,7 +83,7 @@ def atelier_email_link(parser, token):
     """
     return _atelier_email_link(parser=parser, token=token,
                                linkstyle_context_variable='link_style',
-                               template_name='atelier_email/templatetags/atelier_email_link.django.html')
+                               template_name='atelier_email/templatetags/atelier_email_link.html')
 
 
 @register.tag

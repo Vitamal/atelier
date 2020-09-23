@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_api_key',
     # 'djmoney',
     # 'formtools',
-    'channels',
+    # 'channels',
     'django_admin_listfilter_dropdown',
     'django_rq',
     'ievv_opensource.ievv_sms',

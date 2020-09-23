@@ -7,6 +7,14 @@
 <!--Main layout-->
 {% block main %}
     <!--Main container-->
+    {% if not user.is_authenticated %}
+        <section class="section">
+            <div class="container">
+                <h3 class="h4">{% trans 'Please log in to gain access to more content.' %}</h3>
+            </div>
+        </section>
+    {% endif %}
+
     <div class="container bg mt-5">
         <div class="row">
             <div class="col-md-7 mb-4">
@@ -107,16 +115,6 @@
             </div>
             <!--Grid column-->
         </div>
-        {% load atelier_email_tags %}
-        {% atelier_email_secondary_buttonlink "http://example.com"  %}
-            A secondary button link
-        {% end_atelier_email_secondary_buttonlink %}
-        {% atelier_email_primary_buttonlink "http://example.com" %}
-            A primary button link
-        {% end_atelier_email_primary_buttonlink %}
-        {% atelier_email_link "http://example.com" %}
-            A link
-        {% end_atelier_email_link %}
     </div>
     <!--Main container-->
 {% endblock main %}

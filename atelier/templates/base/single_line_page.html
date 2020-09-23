@@ -79,7 +79,7 @@
                                     <div class="dropdown-menu dropdown-menu-lg-right dropdown-info"
                                          aria-labelledby="navbarDropdownMenuLink-4">
                                         <a class="dropdown-item" href="#">{% trans 'My account' %}</a>
-                                        <a class="dropdown-item" href="#">{% trans 'Log out' %}</a>
+                                        <a class="dropdown-item" href="{% url 'logout' %}">{% trans 'Log out' %}</a>
                                     </div>
                                     {% if user.is_staff %}
                                         <li class="nav-item"><a href="/admin/" class="nav-link"><i
@@ -89,7 +89,7 @@
                             {% else %}
                                 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><i
                                         class="fa fa-sign-in"></i></a></li>
-                                <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i
+                                <li class="nav-item"><a href="#" class="nav-link"><i
                                         class="fa fa-user-plus"></i></a></li>
                             {% endif %}
                         </ul>

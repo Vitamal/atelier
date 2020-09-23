@@ -72,6 +72,7 @@ class LoginView(TemplateView):
     @staticmethod
     def get_active_user_by_email(email):
         try:
+            print('**************', email)
             user = User.objects.filter(email=email, is_active=True).get()
         except User.DoesNotExist:
             return None
@@ -92,16 +93,17 @@ class LoginView(TemplateView):
                                'Try to log in using phone number, or register to create an account.')
             return self.send_login_code(request, user_from_email, warning, EMAIL_TYPE, provided_email)
 
+        print('///////////////',provided_email)
         user = authenticate(email=user_from_email.email, password=request.POST.get('password'))
         if user is not None:
             login(request, user)
-            if not user.first_name or not user.last_name or not user.phone_number:
-                messages.warning(
-                    request,
-                    ugettext('Please update your profile with all missing info.'),
-                    extra_tags='alert-warning'
-                )
-                return redirect(reverse('my_profile'))
+            # if not user.first_name or not user.last_name or not user.phone_number:
+            #     messages.warning(
+            #         request,
+            #         ugettext('Please update your profile with all missing info.'),
+            #         extra_tags='alert-warning'
+            #     )
+            #     return redirect(reverse('my_profile'))
             return self.get_success_redirect()
 
         messages.error(request,

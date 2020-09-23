@@ -28,7 +28,7 @@
                     {% endif %}
                 </small>
             {% else %}
-                <h3 class="font-weight-bold text-center text-uppercase text-white mt-4">{% trans 'Create user' %}</h3>
+                <h3 class="font-weight-bold text-center text-uppercase text-white mt-4 ">{% trans 'Create user' %}</h3>
             {% endif %}
 
             <!-- Form -->
@@ -53,8 +53,8 @@
                     </div>
                 {% endfor %}
                 <div class="mb-3">
-                    <button class="btn blue-gradient" type="submit">{% trans 'Save user' %}</button>
-                    <a class="btn peach-gradient" href="
+                    <button class="btn btn-outline-success my-4 waves-effect z-depth-3" type="submit">{% trans 'Save user' %}</button>
+                    <a class="btn btn-outline-warning waves-effect z-depth-3" href="
                             {% if cancel_url %}{{ cancel_url }}{% else %}{% url 'user_management' %}{% endif %}">{% trans 'Cancel' %}</a>
                 </div>
             </form>
