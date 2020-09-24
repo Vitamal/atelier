@@ -19,7 +19,7 @@
 {% for field in form.visible_fields %}
     {% alias field.field.widget.attrs as widget_attrs %}
     {% if not widget_attrs.conditioned or form.conditioned_fields_condition %}
-        <div class="form-group{% if widget_attrs.form_group_class %} {{ widget_attrs.form_group_class }}{% endif %}"
+        <div class="form-group {% if widget_attrs.form_group_class %} {{ widget_attrs.form_group_class }}{% endif %}"
              {% if widget_attrs.forced_id %} id="{{ widget_attrs.forced_id }}"{% endif %}
              {% if widget_attrs.data_json %} data-json='{{ widget_attrs.data_json }}'{% endif %}
         >
@@ -35,11 +35,7 @@
                     {% endif %}
                 </label>
             {% endif %}
-{#            {% if widget_attrs.collaborative_ck_editor %}#}
-{#                {% include 'flexitkt/include/ck_editor_collaborative.django.html' with field=field field_id=field.auto_id %}#}
-{#            {% else %}#}
                 {{ field }}
-{#            {% endif %}#}
             {% if widget_attrs.label_after %}
                 <label for="{{ field.id_for_label }}" class="label is-normal">
                     {{ widget_attrs.label_after }}

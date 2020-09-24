@@ -72,7 +72,6 @@ class LoginView(TemplateView):
     @staticmethod
     def get_active_user_by_email(email):
         try:
-            print('**************', email)
             user = User.objects.filter(email=email, is_active=True).get()
         except User.DoesNotExist:
             return None

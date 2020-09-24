@@ -21,6 +21,7 @@ from atelier import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePageView.as_view(), name='index'),
+    path('my-profile', views.MyProfileView.as_view(), name='my_profile'),
     path('users/', views.UserListView.as_view(), name='user_management'),
     path('users/create', views.UserCreateView.as_view(), name='user_management_create'),
     path('users/edit/<int:user_id>', views.UserUpdateView.as_view(), name='user_management_edit'),

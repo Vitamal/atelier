@@ -3,9 +3,9 @@
 {% load static %}
 
 {% block title %}{% trans 'Atelier users' %}{% endblock %}
-{% block content-main %}
 
-    <div class="card card-form mt-2 mb-4">
+{% block content-main %}
+    <div class="card card-form mt-2 mb-4 z-depth-5">
         <!--Card content-->
         <div class="card-body rounded-top blue darken-4 text-white">
             {% if user_to_manage %}
@@ -61,5 +61,4 @@
             <!-- Form -->
         </div>
     </div>
-    <!-- Material form register -->
 {% endblock content-main %}

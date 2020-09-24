@@ -7,10 +7,10 @@
 <!--Main layout-->
 {% block content-main %}
     <!--Main container-->
-    <div class="card card-form mt-2 mb-4">
+    <div class="card card-form mt-2 mb-4 z-depth-5">
         <!--Card header-->
         <h4 class="card-header primary-color-dark white-text text-center py-4">
-            <strong class="z-depth-3">{% trans 'Sign in' %}</strong>
+            <strong>{% trans 'Sign in' %}</strong>
         </h4>
         <div class="card-body rounded-top blue darken-4 text-white px-lg-5">
             <!--Card content-->
@@ -20,25 +20,13 @@
                 <div class="h5 mb-3  text-white">{% trans 'Log in using email address:' %}</div>
                 {% include 'atelier/include/form-partial.html' with form=email_login_form %}
                 <input type="hidden" name="next" value="{{ request.GET.next }}"/>
-                <!-- Email -->
-{#                <div class="md-form">#}
-{#                    <input type="email" id="materialLoginFormEmail" class="form-control text-white">#}
-{#                    <label for="materialLoginFormEmail" class="text-white">E-mail</label>#}
-{#                </div>#}
-{##}
-{#                <!-- Password -->#}
-{#                <div class="md-form">#}
-{#                    <input type="password" id="materialLoginFormPassword" class="form-control text-white">#}
-{#                    <label for="materialLoginFormPassword" class="text-white">Password</label>#}
-{#                </div>#}
-
                 <div class="d-flex justify-content-around">
                     <div>
                         <!-- Remember me -->
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
-                            <label class="form-check-label text-white" for="materialLoginFormRemember">Remember me</label>
-                        </div>
+{#                        <div class="form-check">#}
+{#                            <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">#}
+{#                            <label class="form-check-label text-white" for="materialLoginFormRemember">{% trans 'Remember me' %}</label>#}
+{#                        </div>#}
                     </div>
                     <div>
                         <!-- Forgot password -->
@@ -72,7 +60,6 @@
             </form>
             <!-- Form -->
         </div>
-    </div>
     </div>
 {% endblock content-main %}
 <!--Main layout-->
