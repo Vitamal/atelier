@@ -16,7 +16,7 @@ EMAIL_TYPE = 'email'
 
 
 class LoginView(TemplateView):
-    template_name = 'atelier/login.html'
+    template_name = 'atelier/authentication/login.html'
     redirect_field_name = REDIRECT_FIELD_NAME
 
     @staticmethod
@@ -92,17 +92,11 @@ class LoginView(TemplateView):
                                'Try to log in using phone number, or register to create an account.')
             return self.send_login_code(request, user_from_email, warning, EMAIL_TYPE, provided_email)
 
-        print('///////////////',provided_email)
-        user = authenticate(email=user_from_email.email, password=request.POST.get('password'))
+        user = authenticate(email=provided_email, password=request.POST.get('password'))
+        # user = authenticate(email=user_from_email.email, password=request.POST.get('password')
+        #                     ) if user_from_email is not None else None
         if user is not None:
             login(request, user)
-            # if not user.first_name or not user.last_name or not user.phone_number:
-            #     messages.warning(
-            #         request,
-            #         ugettext('Please update your profile with all missing info.'),
-            #         extra_tags='alert-warning'
-            #     )
-            #     return redirect(reverse('my_profile'))
             return self.get_success_redirect()
 
         messages.error(request,

@@ -26,6 +26,7 @@ urlpatterns = [
     path('users/create', views.UserCreateView.as_view(), name='user_management_create'),
     path('users/edit/<int:user_id>', views.UserUpdateView.as_view(), name='user_management_edit'),
     path('users/<int:user_id>', views.UserDetailView.as_view(), name='user_management_detail'),
+    path('users/delete/<int:user_id>', views.UserDeleteView.as_view(), name='user_management_delete'),
     # authentication
     path('auth/login/', views.LoginView.as_view(), name='login'),
     path('auth/confirm-code/<int:user_id>/<str:type>', views.ConfirmCodeView.as_view(), name='confirm_code'),

@@ -1,0 +1,17 @@
+{% extends 'base/single_line_page.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Atelier users' %}{% endblock %}
+
+{% block content-header %}
+    <p class="h4 d-flex justify-content-center">{{ title }}</p>
+{% endblock content-header %}
+{% block content-main %}
+    <p>{% blocktrans with name=user_name %}Are you sure you want to delete {{ name }} from atelier?{% endblocktrans %}</p>
+    <form  method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">{% trans 'Delete' %}</button>
+        <a class="btn btn-warning" href="{% url 'user_management_edit' user_id=user.id %}">{% trans 'Cancel' %}</a>
+    </form>
+{% endblock content-main%}

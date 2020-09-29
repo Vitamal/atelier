@@ -23,13 +23,19 @@ class UserCreateView(RedirectSuccessMixin, UserCreateUpdateMixin, CreateView):
     def get_basic_cancel_url(self):
         return reverse('user_management')
 
-    def get_initial(self):
-        """
-        Returns the initial data to use for atelier form field.
-        """
-        initial = super().get_initial()
-        initial['atelier'] = self.request.user.atelier
-        return initial
+    # def get_initial(self):
+    #     """
+    #     Returns the initial data to use for atelier form field.
+    #     """
+    #     initial = super().get_initial()
+    #     initial['atelier'] = self.request.user.atelier
+    #     return initial
+
+    def form_valid(self, form):
+        atelier = self.request.user.atelier
+        form.instance.atelier = atelier
+        form.save()
+        return super().form_valid(form)
 
 
 class UserUpdateView(UserCreateUpdateMixin, UpdateView):

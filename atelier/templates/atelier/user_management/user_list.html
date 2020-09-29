@@ -41,10 +41,11 @@
                         <p><i class="far fa-envelope"></i> {{ user.email }}</p>
                         {% if user.is_administrator or user.is_superuser %}
                             <p><i class="fas fa-user-cog"></i> {% trans 'Atelier administrator' %}</p>
-                        {% else %} <i class="fab fa-centos"></i>
+                        {% else %}
+                            <p><i class="fab fa-centos"></i> {% trans 'Atelier employee' %}</p>
                         {% endif %}
                         <div class="mb-3 text-right">
-                            <a class="btn-sm primary" href="{% url 'user_management_edit' user_id=user.id %}">{% trans 'Edit user' %}</a>
+                            <a class="btn-sm primary" href="{% url 'user_management_detail' user_id=user.id %}">{% trans 'User detail' %}</a>
                         </div>
 
                     </div>
@@ -57,7 +58,7 @@
         {% endfor %}
     </div>
     {% if page_obj.has_other_pages %}
-        {% include 'flexitkt/include/pagination-controls.django.html' with pagination=page_obj %}
+        {% include 'atelier/include/pagination-controls.html' with pagination=page_obj %}
     {% endif %}
 
 {% endblock content-main %}

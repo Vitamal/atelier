@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from atelier.views.view_mixins import AtelierFilterObjectsPreMixin
 from atelier.views.view_mixins import UserManagementAccessMixin
 
-USERS_LIMIT_PER_PAGE = 30
+USERS_LIMIT_PER_PAGE = 6
 
 
 class UserListView(AtelierFilterObjectsPreMixin, UserManagementAccessMixin, ListView):

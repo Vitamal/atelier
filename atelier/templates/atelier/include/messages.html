@@ -1,0 +1,21 @@
+{% comment %}
+    Renders django messages.
+    Used as an include template, and the include template
+    can take the css class for the wrapper via
+    the ``messages_cssclass`` attribute/parameter.
+{% endcomment %}
+{% load i18n %}
+
+{% if messages %}
+    <div id="id_django_messages" role="complementary"
+            class=" alert {% if messages_cssclass %}{{ messages_cssclass }}{% endif %}">
+        {% for message in messages %}
+                <div class="alert {% if message.tags %}{{ message.tags }}{% endif %} text-center">
+                    {% if message.tags and 'alert-dismissible' in message.tags %}
+                        <button class="close" type="button" data-dismiss="alert"><span>&times;</span></button>
+                    {% endif %}
+                    {{ message }}
+                </div>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -2,5 +2,6 @@ from .home import HomePageView
 from .user_managment.user_list import UserListView
 from .user_managment.user_create_update import UserCreateView, UserUpdateView
 from .user_managment.user_detail import UserDetailView
+from .user_managment.user_delete import UserDeleteView
 from .auth_views import *
 from .user_managment.my_profile import MyProfileView

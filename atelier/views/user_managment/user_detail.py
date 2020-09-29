@@ -7,7 +7,7 @@ from atelier.views.view_mixins import UserManagementAccessMixin
 class UserDetailView(UserManagementAccessMixin, DetailView):
     pk_url_kwarg = 'user_id'
     model = User
-    template_name = 'atelier/user_detail.html'
+    template_name = 'atelier/user_management/user_detail.html'
     context_object_name = 'user_to_manage'
 
     def get_queryset(self):

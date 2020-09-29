@@ -1,0 +1,86 @@
+{% extends 'base/base_card_template.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Atelier users' %}{% endblock %}
+
+{% block content-header %}
+    <div class="col-md-12 d-flex flex-row-reverse">
+        <a class="btn blue-gradient mr-5 px-5" href="{% url 'user_management_edit' user_id=user_to_manage.id %}"
+           type="button">
+            {% trans 'Edit user' %}
+        </a>
+    </div>
+{% endblock content-header %}
+
+{% block card-header %}
+    <div class="h4 ">
+        {% if user_to_manage.first_name or user_to_manage.last_name or user_to_manage.email %}
+            {{ user_to_manage }}{% if not user_to_manage.is_superuser and user_to_manage.username %} (
+                {{ user_to_manage.username }}){% endif %}
+        {% else %}
+            {{ user_to_manage.username }}
+        {% endif %}
+        {% if user_to_manage.is_superuser %} ({% trans 'admin' %}){% endif %}
+    </div>
+    <small class="text-muted">
+        {% trans 'Joined on:' %} {{ user_to_manage.date_joined }}
+        {% if user_to_manage.last_login %}
+            {% trans 'Last login on:' %} {{ user_to_manage.last_login }}
+        {% else %}
+            {% trans 'Never logged in.' %}
+        {% endif %}
+    </small>
+{% endblock card-header %}
+{% block card-body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">{% trans 'First name' %}</div>
+            <div class="col">
+                {% if user_to_manage.first_name %}{{ user_to_manage.first_name }}{% else %}-{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+        <div class="row">
+            <div class="col">{% trans 'Last name' %}</div>
+            <div class="col">
+                {% if user_to_manage.last_name %}{{ user_to_manage.last_name }}{% else %}-{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+        <div class="row">
+            <div class="col">{% trans 'Username' %}</div>
+            <div class="col">
+                {% if user_to_manage.username %}{{ user_to_manage.username }}{% else %}-{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+        <div class="row">
+            <div class="col">{% trans 'Email' %}</div>
+            <div class="col">
+                {% if user_to_manage.email %}{{ user_to_manage.email }}{% else %}-{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+        <div class="row">
+            <div class="col">{% trans 'Phone number' %}</div>
+            <div class="col">
+                {% if user_to_manage.phone_number %}{{ user_to_manage.phone_number }}{% else %}-{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+        <div class="row">
+            <div class="col">{% trans 'Occupation' %}</div>
+            <div class="col">
+                {% if user_to_manage.occupation %}{{ user_to_manage.occupation }}{% else %}-{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+        <div class="row">
+            <div class="col">{% trans 'Is administrator' %}</div>
+            <div class="col">
+                {% if user_to_manage.is_administrator %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+        <div class="row">
+            <div class="col">{% trans 'Is active' %}</div>
+            <div class="col">
+                {% if user_to_manage.is_active %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</div>
+        </div>
+        <hr class="hr-light">
+    </div>
+{% endblock card-body %}

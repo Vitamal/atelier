@@ -1,13 +1,10 @@
-{% extends 'base/single_line_page.html' %}
+{% extends 'base/base_card_template.html' %}
 {% load i18n %}
 {% load static %}
 
 {% block title %}{% trans 'Atelier users' %}{% endblock %}
 
-{% block content-main %}
-    <div class="card card-form mt-2 mb-4 z-depth-5">
-        <!--Card content-->
-        <div class="card-body rounded-top blue darken-4 text-white">
+{% block card-header %}
             {% if user_to_manage %}
                 <div class="h4">
                     {% if user_to_manage.first_name or user_to_manage.last_name or user_to_manage.email %}
@@ -30,7 +27,8 @@
             {% else %}
                 <h3 class="font-weight-bold text-center text-uppercase text-white mt-4 ">{% trans 'Create user' %}</h3>
             {% endif %}
-
+{% endblock card-header %}
+{% block card-body %}
             <!-- Form -->
             <form class="pb-3 px-4" method="post">
                 {% csrf_token %}
@@ -56,9 +54,10 @@
                     <button class="btn btn-outline-success my-4 waves-effect z-depth-3" type="submit">{% trans 'Save user' %}</button>
                     <a class="btn btn-outline-warning waves-effect z-depth-3" href="
                             {% if cancel_url %}{{ cancel_url }}{% else %}{% url 'user_management' %}{% endif %}">{% trans 'Cancel' %}</a>
+                    {% if user_to_manage %}
+                        <a class="btn btn-outline-danger my-4 waves-effect z-depth-3" href="{% url 'user_management_delete' user_id=user_to_manage.id %}">{% trans 'Delete user' %}</a>
+                    {% endif %}
                 </div>
             </form>
             <!-- Form -->
-        </div>
-    </div>
-{% endblock content-main %}
+{% endblock card-body %}

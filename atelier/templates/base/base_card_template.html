@@ -1,0 +1,20 @@
+{% extends 'base/single_line_page.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content-main %}
+    <div class="card card-form mt-2 mb-4 z-depth-5">
+        <!--Card header-->
+        <h4 class="card-header primary-color-dark white-text text-center py-4">
+            <strong>
+                {% block card-header %}
+                {% endblock card-header %}
+            </strong>
+        </h4>
+        <div class="card-body rounded-top blue darken-4 text-white px-lg-5">
+            <!--Card body-->
+            {% block card-body %}
+            {% endblock card-body %}
+        </div>
+    </div>
+{% endblock content-main %}

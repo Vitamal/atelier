@@ -1,0 +1,87 @@
+{% load atelier_tags %}
+
+{% if page_name %}
+
+   {% define page_name as p_name %}
+
+{% else %}
+
+   {% define "page" as p_name %}
+
+{% endif %}
+
+<nav class="my-3" role="navigation" aria-label="pagination">
+    <ul class="pagination justify-content-center">
+        {% if pagination.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=pagination.previous_page_number %}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+        {% if pagination.number == 1 %}
+            <li class="page-item active">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=1 %}" aria-label="Goto page 1">1</a>
+            </li>
+        {% else %}
+            <li class="page-item">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=1 %}" aria-label="Goto page 1">1</a>
+            </li>
+        {% endif %}
+        {% if pagination.number > 3 %}
+            <span class="mx-2">&hellip;</span>
+        {% endif %}
+        {% if pagination.number > 2 %}
+            <li class="page-item">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=pagination.previous_page_number %}" aria-label="Goto page {{ pagination.previous_page_number }}">
+                    {{ pagination.previous_page_number }}
+                </a>
+            </li>
+        {% endif %}
+        {% if pagination.number > 1 %}
+            <li class="page-item active">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=pagination.number %}
+" aria-label="Goto page {{ pagination.number }}">
+                    {{ pagination.number }}
+                </a>
+            </li>
+        {% endif %}
+        {% if pagination.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=pagination.next_page_number %}
+" aria-label="Goto page {{ pagination.next_page_number }}">
+                    {{ pagination.next_page_number }}
+                </a>
+            </li>
+        {% endif %}
+        {% if pagination.paginator.num_pages > pagination.number|add:2 %}
+            <span class="mx-2">&hellip;</span>
+            <li class="page-item">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=pagination.num_pages %}
+" aria-label="Goto page {{ pagination.paginator.num_pages }}">
+                    {{ pagination.paginator.num_pages }}
+                </a>
+            </li>
+        {% endif %}
+        {% if pagination.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{% url_prepend request=request name=p_name value=pagination.next_page_number %}
+" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

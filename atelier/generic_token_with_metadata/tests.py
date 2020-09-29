@@ -72,7 +72,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=mommy.make(get_user_model()), token='test-token2',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().count(), 1)
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().first(),
@@ -86,7 +86,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=mommy.make(get_user_model()), token='test-token2',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().count(), 1)
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().first(),
@@ -106,7 +106,7 @@ class TestGenericTokenWithMetadata(TestCase):
             app='testapp', token='test-token3',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.filter_has_expired().count(), 1)
             self.assertEquals(GenericTokenWithMetadata.objects.filter_has_expired().first(),
@@ -118,7 +118,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=testuser, token='test-token',
             expiration_datetime=datetime(2015, 1, 1, 14, 30))
 
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.pop(app='testapp', token='test-token').content_object,
                               testuser)
@@ -129,7 +129,7 @@ class TestGenericTokenWithMetadata(TestCase):
             app='testapp', token='test-token',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             with self.assertRaises(GenericTokenWithMetadata.DoesNotExist):
                 GenericTokenWithMetadata.objects.pop(app='testapp', token='test-token')
@@ -143,7 +143,7 @@ class TestGenericTokenWithMetadata(TestCase):
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 2)
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             GenericTokenWithMetadata.objects.delete_expired()
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 1)
@@ -159,9 +159,9 @@ class TestGenericTokenWithMetadata(TestCase):
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 2)
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
-            call_command('flexitkt_generic_token_with_metadata_delete_expired')
+            call_command('atelier_generic_token_with_metadata_delete_expired')
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 1)
         self.assertEquals(GenericTokenWithMetadata.objects.first(),
                           unexpired_generic_token_with_metadata)
@@ -174,7 +174,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=mommy.make(get_user_model()), token='test-token2',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('flexitkt.generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('atelier.generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertFalse(unexpired_generic_token_with_metadata.is_expired())
             self.assertTrue(expired_generic_token_with_metadata.is_expired())

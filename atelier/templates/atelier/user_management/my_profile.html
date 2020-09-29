@@ -1,59 +1,58 @@
-{% extends 'base/single_line_page.html' %}
+{% extends 'base/base_card_template.html' %}
 {% load i18n %}
 {% load atelier_tags %}
 
 {% block title %}{% trans 'My profile' %}{% endblock title %}
 
-{% block content-main %}
+{% block card-header %}
+    <div class="h4">
+        {% if user.first_name or user.last_name or user.email %}
+            {{ user }}
+            {% if not user.is_superuser and user.username %} ({{ user.username }}){% endif %}
+        {% else %}
+            {{ user.username }}
+        {% endif %}
+        {% if user.is_administrator %} ({% trans 'admin' %}){% endif %}
+    </div>
+    <small class="text-muted">
+        {% trans 'Account created' %}: {{ user.date_joined }}
+        {% if user.last_login %}
+            {% trans 'Last login' %}: {{ user.last_login }}
+        {% else %}
+            {% trans 'Never logged in.' %}
+        {% endif %}
+    </small>
+{% endblock card-header %}
+
+{% block card-body %}
     <form method="post">
         {% csrf_token %}
-        <div class="card mb-2">
-            <div class="card-header text-center">
-                <div class="h4">
-                    {% if user.first_name or user.last_name or user.email %}
-                        {{ user }}
-                        {% if not user.is_superuser and user.username %} ({{ user.username }}){% endif %}
-                    {% else %}
-                        {{ user.username }}
-                    {% endif %}
-                    {% if user.is_administrator %} ({% trans 'admin' %}){% endif %}
-                </div>
-                <small class="text-muted">
-                    {% trans 'Account created' %}: {{ user.date_joined }}
-                    {% if user.last_login %}
-                        {% trans 'Last login' %}: {{ user.last_login }}
-                    {% else %}
-                        {% trans 'Never logged in.' %}
-                    {% endif %}
-                </small>
-            </div>
-            <div class="card-body">
-                {% for non_field_error in form.non_field_errors %}
-                    <p class="text-danger">{{ non_field_error }}</p>
-                {% endfor %}
-                <div class="row">
-                    <div class="col-md-6 offset-md-3">
-                        {% for field in form %}
-                            {% if field.name != 'password1' and field.name != 'password2' %}
-                                <div class="form-group">
-                                    <label for="{{ field.id_for_label }}"
-                                           class="label is-normal">{{ field.label_tag }}</label>
-                                    {{ field }}
-                                    {% for error in field.errors %}
-                                        <p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
-                                    <small>
+        {% for non_field_error in form.non_field_errors %}
+            <p class="text-danger">{{ non_field_error }}</p>
+        {% endfor %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {% for field in form %}
+                    {% if field.name != 'password1' and field.name != 'password2' %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}"
+                                   class="label is-normal">{{ field.label_tag }}</label>
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
+                            <small>
                                         <span class="form-text text-muted" id="helptext_{{ field.auto_id }}">
                                             {{ field.help_text }}
                                         </span>
-                                    </small>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                        <div class="alert alert-warning d-none" id="email-change-warning"><i
-                                class="fa fa-warning"></i> {% trans 'If you change your email address, you will be logged out and a confirmation email will be sent to your new address. You will be able to log in after you check your inbox and confirm your new address.' %}
+                            </small>
                         </div>
-                    </div>
-                    {% comment %}
+                    {% endif %}
+                {% endfor %}
+                <div class="alert alert-warning d-none" id="email-change-warning"><i
+                        class="fa fa-warning"></i> {% trans 'If you change your email address, you will be logged out and a confirmation email will be sent to your new address. You will be able to log in after you check your inbox and confirm your new address.' %}
+                </div>
+            </div>
+            {% comment %}
     @todo Add a way to change password, but not this one
 
                     <div class="col-md-6  {% test_css_class 'user-form-col-two' %}">
@@ -83,15 +82,15 @@
                         </div>
                     </div>
 {% endcomment %}
-                </div>
-            </div>
         </div>
         <div class="mb-3 text-center">
-            <button class="btn btn-primary" type="submit">{% trans 'Save changes' %}</button>
-            <a class="btn btn-warning" href="{% url 'index' %}">{% trans 'Cancel' %}</a>
+            <button class="btn btn-outline-success my-4 waves-effect z-depth-3"
+                    type="submit">{% trans 'Save changes' %}</button>
+            <a class="btn btn-outline-warning waves-effect z-depth-3" href="
+                    {% if cancel_url %}{{ cancel_url }}{% else %}{% url 'user_management' %}{% endif %}">{% trans 'Cancel' %}</a>
         </div>
     </form>
-{% endblock content-main %}
+{% endblock card-body %}
 
 
 {% block includes-js %}
