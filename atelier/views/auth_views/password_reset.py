@@ -17,7 +17,7 @@ EXPIRATION_PERIOD_HOURS = 1
 
 
 class PasswordResetView(FormView):
-    template_name = 'atelier/one-column-form.html'
+    template_name = 'atelier/../../templates/base/one-column-form.html'
     form_class = PasswordResetForm
     title = _('Reset password')
 

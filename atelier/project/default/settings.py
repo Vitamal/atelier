@@ -174,4 +174,4 @@ ATELIER_SITE_DOMAIN = os.environ.get('ATELIER_SITE_DOMAIN', 'localhost:8000')
 
 DEFAULT_FROM_EMAIL = 'noreply@test.com'
 
-ATELIER__SITE_ADMIN_EMAILS = os.environ.get('ATELIER_SITE_ADMIN_EMAILS', ['admin@atelier.xyz'])
+ATELIER_SITE_ADMIN_EMAILS = os.environ.get('ATELIER_SITE_ADMIN_EMAILS', ['admin@atelier.xyz'])

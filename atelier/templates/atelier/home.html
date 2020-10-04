@@ -37,7 +37,9 @@
                 <p>
                     {% trans 'Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!' %}
                 </p>
-                <a href="{% url 'index' %}" class="btn blue-gradient">{% trans 'Try it now!' %}</a>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}" class="btn blue-gradient">{% trans 'Try it now!' %}</a>
+                {% endif %}
             </div>
             <!--Grid column-->
         </div>

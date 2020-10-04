@@ -1,12 +1,12 @@
-{% extends 'atelier/register_base.html' %}
+{% extends 'atelier/authentication/register_base.html' %}
 {% load i18n %}
 {% load static %}
 
 {% block title %}{% trans 'Register' %}{% endblock title %}
 
-{% block page-cover-title %}{% trans 'Create account' %}{% endblock page-cover-title %}
+{% block card-header %}{% trans 'Create account' %}{% endblock card-header %}
 
-{% block content %}
+{% block card-body %}
     <div class="container container-md w-50">
         <form class="container mt-4" action="{% url 'register' %}" method="post">
             {% csrf_token %}
@@ -14,7 +14,7 @@
             <button class="btn btn-primary btn-block" type="submit">{% trans 'Register' %}</button>
         </form>
     </div>
-{% endblock content %}
+{% endblock card-body %}
 
 {% block includes-js %}
     {{ block.super }}

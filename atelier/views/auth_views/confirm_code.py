@@ -12,7 +12,7 @@ from atelier.views.forms.auth_forms import ConfirmCodeForm
 
 
 class ConfirmCodeView(FormView):
-    template_name = 'atelier/confirm_code.html'
+    template_name = 'atelier/authentication/confirm_code.html'
     form_class = ConfirmCodeForm
     _user = None
 

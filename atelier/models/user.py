@@ -1,8 +1,15 @@
+import datetime
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import gettext as _
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.html import format_html
+from django.utils.translation import gettext as _, pgettext
 from ievv_opensource.utils import choices_with_meta
 
+from atelier.atelier_messages.models import SystemMessage
+from atelier.generic_token_with_metadata.models import GenericTokenWithMetadata
 from atelier.models import Atelier
 
 INTERN = 'intern'
@@ -73,3 +80,36 @@ class User(AbstractUser):
     @true_if_superuser
     def is_admin(self):
         return self.is_administrator
+
+    def get_email_confirmation_url(self, request):
+        token = GenericTokenWithMetadata.objects.generate(
+            app=self._meta.app_label, expiration_datetime=timezone.now() + datetime.timedelta(
+                days=getattr(settings, 'CONFIRM_EMAIL_TOKEN_EXPIRATION_PERIOD_DAYS', 14)),
+            content_object=self, single_use=True)
+        return request.build_absolute_uri(reverse('confirm_email', kwargs={'user_id': self.id, 'token': token.token}))
+
+    def send_confirm_email_message(self, request):
+        confirmation_url = self.get_email_confirmation_url(request)
+        SystemMessage.objects.send(
+            subject=pgettext('Email address confirmation message', 'Confirm your email address'),
+            message_content_plain='{message}\n{link}'.format(
+                link=confirmation_url,
+                message=pgettext('Email address confirmation message',
+                                 'Dear %(name)s, to confirm your email address, please follow the link:') % {
+                            'name': self.get_full_name()
+                        }
+            ),
+            to_email=self.email,
+            message_content_html=format_html(
+                '<p>{greeting},</p>'
+                '<p>{message}: <a href="{link}">{link_text}</a></p>',
+                greeting=pgettext('Email address confirmation greeting', 'Dear %(name)s') % {
+                    'name': self.get_full_name()
+                },
+                message=pgettext('Email address confirmation html message',
+                                 'To confirm your email address, please follow the link'),
+                link=confirmation_url,
+                link_text=pgettext('Email address confirmation link text',
+                                   'Confirm email'),
+            ),
+        )
