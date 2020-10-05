@@ -25,90 +25,104 @@
 {% endblock card-header %}
 
 {% block card-body %}
-    <form method="post">
+    <form class="pb-3 px-4" method="post">
         {% csrf_token %}
         {% for non_field_error in form.non_field_errors %}
             <p class="text-danger">{{ non_field_error }}</p>
         {% endfor %}
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                {% for field in form %}
-                    {% if field.name != 'password1' and field.name != 'password2' %}
-                        <div class="form-group">
-                            <label for="{{ field.id_for_label }}"
-                                   class="label is-normal">{{ field.label_tag }}</label>
-                            {{ field }}
-                            {% for error in field.errors %}
-                                <p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
-                            <small>
-                                        <span class="form-text text-muted" id="helptext_{{ field.auto_id }}">
-                                            {{ field.help_text }}
-                                        </span>
-                            </small>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                <div class="alert alert-warning d-none" id="email-change-warning"><i
-                        class="fa fa-warning"></i> {% trans 'If you change your email address, you will be logged out and a confirmation email will be sent to your new address. You will be able to log in after you check your inbox and confirm your new address.' %}
-                </div>
+        {% for field in form %}
+            <div class="md-form">
+                {% if field.name != 'password1' and field.name != 'password2' %}
+                    <label for="{{ field.id_for_label }}"
+                           class="text-white">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
+                    <small>
+                            <span class="text-white" id="helptext_{{ field.auto_id }}">
+                                {{ field.help_text }}
+                            </span>
+                    </small>
+                {% endif %}
             </div>
-            {% comment %}
-    @todo Add a way to change password, but not this one
-
-                    <div class="col-md-6  {% test_css_class 'user-form-col-two' %}">
-                        <div class="form-group">
-                            {% with form.password1 as field %}
-                               <label for="{{ field.id_for_label }}" class="label is-normal">{{ field.label_tag }}</label>
-                                {{ field }}
-                                {% for error in field.errors %}<p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
-                                <small>
-                                    <span class="form-text text-muted" id="helptext_{{ field.auto_id }}">
-                                        {{ field.help_text }}
-                                    </span>
-                                </small>
-                            {% endwith %}
-                        </div>
-                        <div class="form-group">
-                            {% with form.password2 as field %}
-                               <label for="{{ field.id_for_label }}" class="label is-normal">{{ field.label_tag }}</label>
-                                {{ field }}
-                                {% for error in field.errors %}<p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
-                                <small>
-                                    <span class="form-text text-muted" id="helptext_{{ field.auto_id }}">
-                                        {{ field.help_text }}
-                                    </span>
-                                </small>
-                            {% endwith %}
-                        </div>
-                    </div>
-{% endcomment %}
+        {% endfor %}
+        <div class="alert alert-warning d-none" id="email-change-warning">
+            <i class="fa fa-warning"></i>
+            {% trans 'If you change your email address, you will be logged out and a confirmation email will be sent to your new address. You will be able to log in after you check your inbox and confirm your new address.' %}
         </div>
-        <div class="mb-3 text-center">
+        {% with form.password1 as field %}
+            <div class="md-form">
+                <label for="{{ field.id_for_label }}" class="label is-normal  text-white">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                    <p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
+                <small>
+                        <span class="text-white" id="helptext_{{ field.auto_id }}">
+                            {{ field.help_text }}
+                        </span>
+                </small>
+            </div>
+        {% endwith %}
+        {% with form.password2 as field %}
+            <div class="md-form">
+                <label for="{{ field.id_for_label }}" class="label is-normal  text-white">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                    <p class="text-danger"><i class="fa fa-times"></i> {{ error }}</p>{% endfor %}
+                <div class="alert alert-warning d-none" id="psw-change-warning">
+                    <i class="fa fa-warning"></i>
+                    {% trans 'If you change your password, you will be logged out and a confirmation email will be sent to your email address. You will be able to log in after you check your inbox and confirm your password.' %}
+                </div>
+                <small>
+                        <span class="text-white" id="helptext_{{ field.auto_id }}">
+                            {{ field.help_text }}
+                        </span>
+                </small>
+            </div>
+        {% endwith %}
+        <div class="mb-3">
             <button class="btn btn-outline-success my-4 waves-effect z-depth-3"
                     type="submit">{% trans 'Save changes' %}</button>
             <a class="btn btn-outline-warning waves-effect z-depth-3" href="
-                    {% if cancel_url %}{{ cancel_url }}{% else %}{% url 'user_management' %}{% endif %}">{% trans 'Cancel' %}</a>
+                 {% if cancel_url %}
+                    {{ cancel_url }}
+                 {% else %}
+                    {% url 'user_management' %}
+                 {% endif %}">
+                {% trans 'Cancel' %}
+            </a>
         </div>
     </form>
 {% endblock card-body %}
-
 
 {% block includes-js %}
     {{ block.super }}
     <script>
         $(document).ready(() => {
-                const emailInputElement = $('#id_email')
-                const warningElement = $('#email-change-warning')
-                let initEmail = emailInputElement.val()
-                emailInputElement.on('keyup', (e) => {
+            const emailInputElement = $('#id_email')
+            const emailWarningElement = $('#email-change-warning')
+            let initEmail = emailInputElement.val()
+            const pswInputElement = $('#id_password1')
+            const pswWarningElement = $('#psw-change-warning')
+            let initPsw = pswInputElement.val()
+            emailInputElement.on('keyup', (e) => {
                     console.log('changing')
                     if (e.target.value === initEmail) {
-                        warningElement.addClass('d-none')
+                        emailWarningElement.addClass('d-none')
                     } else {
-                        warningElement.removeClass('d-none')
+                        emailWarningElement.removeClass('d-none')
                     }
-                })
-            }
+                }
+            )
+            pswInputElement.on('keyup', (e) => {
+                        console.log('changing')
+                        if (e.target.value === initPsw) {
+                            pswWarningElement.addClass('d-none')
+                        } else {
+                            pswWarningElement.removeClass('d-none')
+                        }
+                    })
+                }
         )
     </script>
 {% endblock %}

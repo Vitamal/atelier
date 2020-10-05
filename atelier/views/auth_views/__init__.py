@@ -6,3 +6,4 @@ from .password_reset import PasswordResetView
 from .confirm_password_reset import ConfirmPasswordResetView
 from .confirm_code import ConfirmCodeView
 from .code_not_received import CodeNotReceivedView
+from .signup import SignupView

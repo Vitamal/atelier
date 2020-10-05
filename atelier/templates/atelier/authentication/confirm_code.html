@@ -1,15 +1,13 @@
-{% extends 'base/one_column_layout.html' %}
+{% extends 'base/base_card_template.html' %}
 {% load i18n %}
 
 {% block title %}{% trans 'Confirm code' %}{% endblock title %}
-{% block one-column-content %}
-    <div class="card">
-        <div class="card-header">
-            <h5>{% trans 'Log in with a one-time code you have sent' %}</h5>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-md-10 offset-md-1">
+
+{% block card-header %}
+            <h4>{% trans 'Log in with a one-time code you have sent' %}</h4>
+{% endblock card-header %}
+
+{% block card-body %}
                     <p class="h5 mb-5">
                         {% trans 'One-time log in code for' %} {% if phone_number %}{{ phone_number }}{% else %}{{ email }}{% endif %}
                     </p>
@@ -26,13 +24,9 @@
                             <li>{% trans 'If you waited for more than 5 minutes, something has gone wrong. Please use the button below.' %}</li>
                         </ul>
                     </div>
-                </div>
-            </div>
             <div class="row my-3">
                 <div class="col-12 col-md-10 offset-md-1">
                     <a href="{% url 'code_not_received' user_id=user.id type=login_type %}" class="btn btn-secondary btn-block under-development">{% trans 'I have not received my code' %}</a>
                 </div>
             </div>
-        </div>
-    </div>
-{% endblock one-column-content %}
+{% endblock card-body %}

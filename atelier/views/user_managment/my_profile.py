@@ -7,9 +7,10 @@ from django.views.generic.edit import UpdateView
 
 from atelier.models import User
 from atelier.views.user_managment.forms.my_profile_form import MyProfileForm
+from atelier.views.view_mixins import RedirectSuccessMixin
 
 
-class MyProfileView(LoginRequiredMixin, UpdateView):
+class MyProfileView(RedirectSuccessMixin, LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'atelier/user_management/my_profile.html'
     context_object_name = 'user'
@@ -20,6 +21,9 @@ class MyProfileView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_basic_cancel_url(self):
+        return reverse('index')
 
     def form_valid(self, form):
         if 'email' in form.changed_data:

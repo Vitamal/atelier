@@ -11,10 +11,10 @@ class MyProfileForm(PasswordForm):
         model = get_user_model()
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2']
         widgets = {
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control text-white'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control text-white'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control text-white', 'required': True}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control text-white', 'required': True}),
         }
 
     def clean_email(self):

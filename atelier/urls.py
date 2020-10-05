@@ -33,7 +33,7 @@ urlpatterns = [
     path('auth/code-not-received/<int:user_id>/<str:type>', views.CodeNotReceivedView.as_view(),
          name='code_not_received'),
     path('auth/logout/', views.LogoutView.as_view(), name='logout'),
-    # path('auth/signup/', views.SignupView.as_view(), name='register'),
+    path('auth/signup/', views.SignupView.as_view(), name='register'),
     path('auth/confirm-email/<int:user_id>/<str:token>/', views.ConfirmEmailView.as_view(), name='confirm_email'),
     path('auth/reset-password/', views.PasswordResetView.as_view(), name='reset_password'),
     path('auth/reset-password-confirm/<str:token>/',

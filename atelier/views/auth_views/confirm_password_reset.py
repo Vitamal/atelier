@@ -11,7 +11,7 @@ from atelier.generic_token_with_metadata.models import GenericTokenWithMetadata,
 
 
 class ConfirmPasswordResetView(UpdateView):
-    template_name = 'atelier/one-column-form.html'
+    template_name = 'atelier/../../templates/base/one-column-form.html'
     title = _('Reset password')
     model = User
     token_pk_url_kwarg = 'token'

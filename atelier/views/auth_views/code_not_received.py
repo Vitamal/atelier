@@ -9,7 +9,7 @@ from atelier.atelier_messages.models import SystemMessage
 
 
 class CodeNotReceivedView(TemplateView):
-    template_name = 'atelier/code_not_received.html'
+    template_name = 'atelier/authentication/code_not_received.html'
     user = None
 
     def get_user(self):
