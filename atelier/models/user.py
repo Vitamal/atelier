@@ -32,7 +32,6 @@ OCCUPATIONS_CHOICES = choices_with_meta.ChoicesWithMeta(
 def true_if_superuser(m):
     def wrapper_true_if_superuser(instance, *args, **kwargs):
         return True if instance.is_superuser else m(instance, *args, **kwargs)
-
     return wrapper_true_if_superuser
 
 
@@ -40,7 +39,6 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    # __app_access_dict = None
     INTERN = INTERN
     SEAMSTRESS = SEAMSTRESS
     DESIGNER = DESIGNER
