@@ -55,6 +55,7 @@ class User(AbstractUser):
     )
     atelier = models.ForeignKey(Atelier, on_delete=models.CASCADE, verbose_name=_('atelier'))
     is_administrator = models.BooleanField(null=False, blank=False, default=False)
+    # avatar = models.ImageField(upload_to='avatars')
 
     def save(self, *args, **kwargs):
         if self.email == '':

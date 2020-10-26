@@ -25,7 +25,10 @@
 
                     <!-- Avatar -->
                     <div class="avatar mx-auto white">
-                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg"
+                        <img src="{% if user.avatar %}
+                                        {% static 'atelier/avatars/{{ user.avatar }}' %}
+                                    {% else %} {% static 'atelier/avatars/avatar.png' %}
+                                    {% endif %}"
                              class="rounded-circle"
                              alt="user avatar">
                     </div>
@@ -45,7 +48,8 @@
                             <p><i class="fab fa-centos"></i> {% trans 'Atelier employee' %}</p>
                         {% endif %}
                         <div class="mb-3 text-right">
-                            <a class="btn-sm primary" href="{% url 'user_management_detail' user_id=user.id %}">{% trans 'User detail' %}</a>
+                            <a class="btn-sm primary"
+                               href="{% url 'user_management_detail' user_id=user.id %}">{% trans 'User detail' %}</a>
                         </div>
 
                     </div>
