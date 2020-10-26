@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.urls import reverse
 from django.utils.http import urlencode
@@ -7,17 +6,13 @@ from .models import User
 from .models import Atelier
 from django.contrib import admin
 
-admin.site.register(User, UserAdmin)
-UserAdmin.list_display += ('occupation', 'atelier',)
-UserAdmin.list_filter += ('atelier',)
-UserAdmin.fieldsets[1][1]['fields'] += ('is_administrator', 'phone_number', 'atelier', 'occupation')
+@admin.register(User)
+class UsersAdmin(UserAdmin):
+    list_display = ('username', 'email', 'occupation', 'atelier', 'is_administrator')
+    UserAdmin.fieldsets[1][1]['fields'] += ('is_administrator', 'phone_number', 'atelier', 'occupation')
+    list_filter = ('atelier', 'is_staff', 'is_active', 'occupation')
+    UserAdmin.add_fieldsets[0][1]['fields'] += ('email', 'atelier', 'occupation')
 
-
-# admin.site.register(Atelier)
-
-# @admin.register(User)
-# class UsersAdmin(admin.ModelAdmin):
-#     pass
 
 def custom_titled_filter(title):
     """
@@ -52,3 +47,13 @@ class AtelierAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">{} Users</a>', url, user_quantity)
 
     show_user_quantity.short_description = 'Users quantity'
+
+class BaseAdmin(admin.ModelAdmin):
+    list_filter = [('created_by',), ('changed_by',)]
+
+    meta_fields = [
+        'created_by',
+        'created_datetime',
+        'changed_by',
+        'changed_datetime'
+    ]

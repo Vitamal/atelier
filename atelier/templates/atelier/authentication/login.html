@@ -13,44 +13,34 @@
         <div class="h5 mb-3  text-white">{% trans 'Log in using email address:' %}</div>
         {% include 'atelier/include/form-partial.html' with form=email_login_form %}
         <input type="hidden" name="next" value="{{ request.GET.next }}"/>
-        <div class="d-flex justify-content-around">
-            <div>
-                <!-- Remember me -->
-                {#                <div class="form-check">#}
-                {#                    <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">#}
-                {#                    <label class="form-check-label text-white"#}
-                {#                           for="materialLoginFormRemember">{% trans 'Remember me' %}</label>#}
-                {#                </div>#}
-            </div>
-            <div>
-                <!-- Forgot password -->
-                <button type="submit" class="btn btn-outline-warning waves-effect btn-block z-depth-3"
-                        name="email_code">
-                    {% trans 'Forgot password?' %}
-                </button>
-                <small class="text-white">{% trans 'Send one time password that can be used to login to my e-mail' %}<i
-                        class="fa fa-chevron-right ml-2"></i></small>
-            </div>
-        </div>
-
         <!-- Sign in button -->
         <button class="btn btn-outline-success btn-block my-4 waves-effect z-depth-3" type="submit"
                 name="email_password">
             {% trans 'Sign in' %}
         </button>
-
+        <div>
+            <!-- Forgot password -->
+            <button class="btn btn-outline-info btn-sm waves-effect btn-block z-depth-3"
+                    name="email_code">
+                {% trans 'Forgot password?' %}
+            </button>
+            <small class="text-white">{% trans 'Send one time password that can be used to login to my e-mail' %}<i
+                    class="fa fa-chevron-right ml-2"></i></small>
+        </div>
         <!-- Register -->
-        <p class="text-white">{% trans 'Not a member?' %}
-            <a href="{% url 'register' %}" class="text-success">{% trans 'Register' %}</a>
-        </p>
+        <div class="mt-4">
+            <p class="text-white">{% trans 'Not a member?' %}
+                <a href="{% url 'register' %}" class="text-success">{% trans 'Register' %}</a>
+            </p>
+        </div>
         <!-- Social login -->
-{#        <p class="text-white">{% trans 'or sign in with:' %}</p>#}
-{#        <a type="button" class="btn-floating btn-fb btn-sm text-success">#}
-{#            <i class="fab fa-facebook-f"></i>#}
-{#        </a>#}
-{#        <a type="button" class="btn-floating btn-tw btn-sm text-warning">#}
-{#            <i class="fab fa-twitter"></i>#}
-{#        </a>#}
+        {#        <p class="text-white">{% trans 'or sign in with:' %}</p>#}
+        {#        <a type="button" class="btn-floating btn-fb btn-sm text-success">#}
+        {#            <i class="fab fa-facebook-f"></i>#}
+        {#        </a>#}
+        {#        <a type="button" class="btn-floating btn-tw btn-sm text-warning">#}
+        {#            <i class="fab fa-twitter"></i>#}
+        {#        </a>#}
     </form>
     <!-- Form -->
 {% endblock card-body %}
