@@ -1,10 +1,11 @@
 from django.contrib.auth.admin import UserAdmin
 from django.urls import reverse
 from django.utils.http import urlencode
-
-from .models import User
-from .models import Atelier
 from django.contrib import admin
+
+from .models import User, Customer, Order, Product
+from .models import Atelier, AllowanceDiscount, ComplicationElement, Fabric, BasicProduct
+
 
 @admin.register(User)
 class UsersAdmin(UserAdmin):
@@ -48,6 +49,7 @@ class AtelierAdmin(admin.ModelAdmin):
 
     show_user_quantity.short_description = 'Users quantity'
 
+
 class BaseAdmin(admin.ModelAdmin):
     list_filter = [('created_by',), ('changed_by',)]
 
@@ -57,3 +59,38 @@ class BaseAdmin(admin.ModelAdmin):
         'changed_by',
         'changed_datetime'
     ]
+
+
+@admin.register(Fabric)
+class FabricAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'group', 'complexity_factor']
+
+
+@admin.register(AllowanceDiscount)
+class AllowanceDiscountAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'coefficient', 'label']
+
+
+@admin.register(BasicProduct)
+class BasicProductAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'group']
+
+
+@admin.register(ComplicationElement)
+class ComplicationElementAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'group', 'base_price', 'complexity']
+
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ['id', 'first_name', 'first_name', 'place', 'atelier']
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'customer', 'product', 'order_date', 'performer', 'atelier', 'is_closed']
+
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'basic_product', 'base_price', 'atelier']

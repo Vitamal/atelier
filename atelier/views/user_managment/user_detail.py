@@ -10,7 +10,7 @@ class UserDetailView(UserManagementAccessMixin, DetailView):
     template_name = 'atelier/user_management/user_detail.html'
     context_object_name = 'user_to_manage'
 
-    def get_queryset(self):
-        return super().get_queryset().only('id', 'first_name', 'last_name', 'email', 'username', 'phone_number',
-                                           'is_administrator', 'occupation', 'date_joined', 'last_login',
-                                           'is_superuser', 'is_staff')
+    # def get_queryset(self):
+    #     return super().get_queryset().only('id', 'first_name', 'last_name', 'email', 'username', 'phone_number',
+    #                                        'is_administrator', 'occupation', 'date_joined', 'last_login',
+    #                                        'is_superuser', 'is_staff', 'is_active')
