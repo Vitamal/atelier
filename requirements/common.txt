@@ -14,7 +14,7 @@ requests==2.23.0
 PyYAML==5.3.1
 
 django-filter==2.2.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-api-key==2.0.0
 markdown==3.2.1
 django-admin-list-filter-dropdown==1.0.3
