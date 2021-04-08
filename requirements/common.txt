@@ -1,5 +1,5 @@
 # https://pypi.python.org/pypi/Django
-Django==3.0.8
+Django==3.0.14
 dj-database-url==0.5.0
 
 # https://pypi.python.org/pypi/ievv_opensource
